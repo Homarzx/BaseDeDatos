@@ -555,6 +555,7 @@ public class Screen2Controller implements Initializable {
          System.out.println(departClick.getSelectionModel().getSelectedItem());
          departClick.setStyle("-fx-prompt-text-fill: white");
          BuscarProductoCat();
+         
     }
 
     

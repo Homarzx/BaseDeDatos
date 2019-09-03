@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="container" fx:id="container" prefHeight="505.0" prefWidth="758.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tiendaonline.FXMLDocumentController">
+<AnchorPane id="container" fx:id="container" prefHeight="505.0" prefWidth="758.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tiendaonline.InicioSesionController">
    <children>
       <ImageView fitHeight="643.0" fitWidth="763.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -29,9 +29,9 @@
       </JFXButton>
       <AnchorPane id="panel1" fx:id="panel1" layoutX="452.0" layoutY="62.0" prefHeight="385.0" prefWidth="269.0" style="-fx-background-color: rgba(0, 0, 0, 0.3);">
          <children>
-            <JFXTextField focusColor="WHITE" layoutX="18.0" layoutY="81.0" prefHeight="25.0" prefWidth="237.0" style="-fx-text-fill: WHITE;" unFocusColor="#575757" />
-            <JFXPasswordField focusColor="WHITE" layoutX="18.0" layoutY="147.0" prefHeight="25.0" prefWidth="237.0" style="-fx-text-fill: WHITE;" unFocusColor="#575757" />
-            <JFXButton id="iniciar" fx:id="botonIniciarSesion" buttonType="RAISED" layoutX="18.0" layoutY="185.0" prefHeight="33.0" prefWidth="237.0" ripplerFill="WHITE" stylesheets="@../Styles/EstiloBoton.css" text="Iniciar sesión" textAlignment="CENTER" textFill="WHITE">
+            <JFXTextField fx:id="validarCorreo" focusColor="WHITE" layoutX="18.0" layoutY="81.0" prefHeight="25.0" prefWidth="237.0" style="-fx-text-fill: WHITE;" unFocusColor="#575757" />
+            <JFXPasswordField fx:id="validarContraseña" focusColor="WHITE" layoutX="18.0" layoutY="147.0" prefHeight="25.0" prefWidth="237.0" style="-fx-text-fill: WHITE;" unFocusColor="#575757" />
+            <JFXButton id="iniciar" fx:id="botonIniciarSesion" buttonType="RAISED" layoutX="18.0" layoutY="185.0" onAction="#iniciarSesionAcceso" prefHeight="33.0" prefWidth="237.0" ripplerFill="WHITE" stylesheets="@../Styles/EstiloBoton.css" text="Iniciar sesión" textAlignment="CENTER" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
