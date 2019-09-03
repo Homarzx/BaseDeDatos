@@ -1,0 +1,143 @@
+#cerrar {
+    -fx-opacity: 0.3;
+    -fx-background-color:  black;
+}
+#cerrar:hover{
+    -fx-opacity: 1;
+}
+
+.jfx-button{
+    -fx-background-color:  #3180F3;
+}
+
+.jfx-button:hover{
+    -fx-background-color:  #154ff4;
+}
+
+#iniciar{
+    -fx-background-color:   #3C3C3D;
+    -fx-border-color: white;
+}
+
+#iniciar:hover{
+    -fx-background-color:  black;
+}
+
+#regresar{
+    -fx-text-fill: #9ccfff;
+}
+#regresar:hover{
+    -fx-text-fill: white;
+}
+
+.scroll-pane {
+    -fx-background-color: transparent;
+}
+
+.scroll-bar:horizontal, .scroll-bar:vertical{
+    -fx-background-color:transparent;
+}
+
+.increment-button, .decrement-button {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+.scroll-bar:vertical .increment-arrow,
+ .scroll-bar:vertical .decrement-arrow,.scroll-bar:horizontal .increment-arrow,
+ .scroll-bar:horizontal .decrement-arrow{
+    -fx-shape : " ";    
+    
+}
+
+.scroll-bar:horizontal .track,
+.scroll-bar:vertical .track{
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-background-radius: 0em;
+}
+
+.scroll-bar:horizontal .thumb,
+.scroll-bar:vertical .thumb {
+    -fx-background-color: #ABB2B9;
+    -fx-background-radius: 5em;
+}
+
+.scroll-bar:hover .thumb {
+    
+    -fx-background-color: #2C3E50;
+    -fx-background-radius: 5em;
+}
+
+
+.hbox {
+    -fx-background-color:  #EAECEE;
+    
+}
+
+#anchorgeneral {
+    -fx-background-color:  #EAECEE;
+}
+
+#botonDerecho {
+    fx-opacity: 0.7;
+}
+
+#botonIzquierdo {
+    fx-opacity: 0.7;
+}
+
+#botonDerecho:hover{
+    -fx-text-fill: 1;
+}
+
+#botonIzquierdo:hover{
+    fx-opacity: 1;
+}
+
+.jfx-combo-box {
+    -fx-font-size: 14px;
+    -fx-prompt-text-fill: white;
+    
+    
+}
+
+#departamentos:hover{
+    -fx-border-color: grey;    
+    
+}
+
+#envio:hover{
+    -fx-border-color: grey;
+    
+}
+
+#inicioPag {
+    -fx-background-color:  #566573;
+}
+
+#inicioPag:hover{
+    -fx-background-color:  #283747;
+}
+
+#encabezadosLb{
+    -fx-font-weight: bold;
+    -fx-font-size: 12px;
+    -fx-text-fill: #c3bbbb;
+}
+
+#encabezadosLb:hover{
+    -fx-border-color: grey; 
+    -fx-font-weight: bold;
+}
+
+#verBox:hover{
+    -fx-border-color: grey; 
+}
+
+#pedidos:hover{
+    -fx-border-color: grey; 
+}
+
+#carrito:hover{
+    -fx-border-color: grey; 
+}
