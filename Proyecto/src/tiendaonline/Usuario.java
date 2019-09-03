@@ -78,4 +78,57 @@ public class Usuario {
             JOptionPane.showMessageDialog(null, "FALTA LLENAR CAMPOS");
         }
     }
+    
+    public String[] ComprobarCuenta(JFXTextField correo) {
+        String[] lista = new String[3];
+        try {
+            Conexion con = new Conexion();
+            cn = con.conectar();
+
+            String sql = "CALL BUSCAR_CUENTA(?,?,?,?,?)";
+
+            PreparedStatement pst = cn.prepareCall(sql);
+
+            pst.setString(1, correo.getText());
+            pst.setString(2, lista[0]);
+            pst.setString(3, lista[1]);
+            pst.setString(4, lista[2]);
+            pst.setString(5, lista[3]);
+            
+            pst.executeUpdate();
+            
+            pst.close();
+            cn.close();
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+            JOptionPane.showMessageDialog(null, "VERIFICAR INFORMACION");
+        }
+        return lista;
+    }
+    
+    public String DevolverNombreUsuario(String cedula) {
+        String[] lista = new String[2];
+        String nombre = "";
+        try {
+            Conexion con = new Conexion();
+            cn = con.conectar();
+
+            String sql = "CALL BUSCAR_USUARIO_DEVUELVE_NOMBRE(?,?)";
+
+            PreparedStatement pst = cn.prepareCall(sql);
+
+            pst.setString(1, cedula);
+            pst.setString(2, nombre);
+            lista = nombre.split(" ");
+            
+            pst.executeUpdate();
+            
+            pst.close();
+            cn.close();
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+            JOptionPane.showMessageDialog(null, "VERIFICAR INFORMACION");
+        }
+        return lista[0];
+    }
 }

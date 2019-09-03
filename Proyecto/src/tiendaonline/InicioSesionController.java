@@ -35,13 +35,14 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author barce
  */
 public class InicioSesionController implements Initializable, DraggedScene {
-    
+
     @FXML
     private JFXButton botonIniciarSesion;
 
@@ -71,7 +72,7 @@ public class InicioSesionController implements Initializable, DraggedScene {
 
     @FXML
     private Hyperlink regresar;
-    
+
     @FXML
     private JFXButton crearCuenta1;
 
@@ -134,16 +135,23 @@ public class InicioSesionController implements Initializable, DraggedScene {
 
     @FXML
     private JFXTextField v_ruc;
-    
+
+    @FXML
+    private JFXTextField validarCorreo;
+
+    @FXML
+    private JFXTextField validarContraseña;
+
     public static String tipoUser;
-    
+    public static String nomUsuario;
+
     @FXML
     void registrarComprador(ActionEvent event) {
         if (c_contraseña.getText().equals(c_repetirContraseña)) {
             Usuario user = new Usuario();
             user.RegistrarUsuarioComprador(c_cedula, c_nombres, c_apellidos, tipoUser, c_edad, c_telefono, c_correo, c_contraseña);
         }
-        
+
     }
 
     @FXML
@@ -153,24 +161,38 @@ public class InicioSesionController implements Initializable, DraggedScene {
             user.RegistrarUsuarioVendedor(v_cedula, v_nombres, v_apellidos, tipoUser, v_nomTienda, v_telefono, v_ruc, v_correo, v_contraseña);
         }
     }
-    
+
     Screen2Controller sc;
+
     @FXML
     void iniciarSesionAcceso(ActionEvent event) {
-        try {
-            sc = new Screen2Controller();
-            
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Screen2.fxml"));
-            Parent root1 = (Parent) fxmlLoader.load();
-            Stage stage = new Stage();
-            stage.initStyle(StageStyle.UNDECORATED);
-            stage.setScene(new Scene(root1));
-            stage.show();
-        } catch (Exception ex) {
+        Usuario user = new Usuario();
+        String[] lista = user.ComprobarCuenta(validarCorreo);
+        if (lista[2].equals('1')) {
+            if (lista[0].equals(validarContraseña.getText())) {
+                tipoUser = lista[1];
+                nomUsuario = user.DevolverNombreUsuario(lista[3]);
+                try {
+                    sc = new Screen2Controller();
 
+                    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Screen2.fxml"));
+                    Parent root1 = (Parent) fxmlLoader.load();
+                    Stage stage = new Stage();
+                    stage.initStyle(StageStyle.UNDECORATED);
+                    stage.setScene(new Scene(root1));
+                    stage.show();
+                } catch (Exception ex) {
+                    System.out.println("ERROR FATAL");
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "CONTRASEÑA INCORRECTA");
+            }
+        } else if (lista[2].equals('0')) {
+            JOptionPane.showMessageDialog(null, "USUARIO NO REGISTRADO");
         }
+
     }
-    
+
     @FXML
     private void AccionCerrar(ActionEvent event) {
         Stage stage = (Stage) container.getScene().getWindow();
@@ -236,26 +258,25 @@ public class InicioSesionController implements Initializable, DraggedScene {
         fade.setToValue(1);
         fade.play();
     }
-    
-    private void verificarDatos(){
+
+    private void verificarDatos() {
         String correo;
         String password;
         ResultSet rs;
         Connection cn = null;
-        try{
-            Conexion con =  new Conexion();
+        try {
+            Conexion con = new Conexion();
             cn = con.conectar();
             String sql = "";
             PreparedStatement pst = cn.prepareCall(sql);
             rs = pst.executeQuery();
             rs.next();
-            while(rs.isAfterLast()!= true){
+            while (rs.isAfterLast() != true) {
                 String t = rs.getString("nombre");
                 rs.next();
             }
 
-        }
-        catch(SQLException e){
+        } catch (SQLException e) {
             System.err.println(e);
         }
     }
