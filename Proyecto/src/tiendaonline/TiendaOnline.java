@@ -32,7 +32,7 @@ public class TiendaOnline extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
-        File datosDB = new File("c:\\InfoDB\\datosdb.txt");
+        File datosDB = new File("\\InfoDB\\datosdb.txt");
         if (datosDB.exists()) {
             Scanner scanner;
             try {

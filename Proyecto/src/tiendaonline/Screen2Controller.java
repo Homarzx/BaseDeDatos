@@ -44,6 +44,8 @@ import javafx.stage.StageStyle;
  * @author barce
  */
 public class Screen2Controller implements Initializable {
+    public static String tipoUsuarioString;
+    public String nombreUsuario;
     
     private TreeSet<String> treeSet;
 
@@ -551,6 +553,7 @@ public class Screen2Controller implements Initializable {
     @FXML
     void seleccionarItem(ActionEvent event) {
          System.out.println(departClick.getSelectionModel().getSelectedItem());
+         departClick.setStyle("-fx-prompt-text-fill: white");
          BuscarProductoCat();
     }
 

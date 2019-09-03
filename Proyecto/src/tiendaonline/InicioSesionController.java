@@ -7,6 +7,8 @@ package tiendaonline;
 
 import Conectar.Conexion;
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXPasswordField;
+import com.jfoenix.controls.JFXTextField;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -21,20 +23,24 @@ import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
 /**
  *
  * @author barce
  */
-public class FXMLDocumentController implements Initializable, DraggedScene {
+public class InicioSesionController implements Initializable, DraggedScene {
     
     @FXML
     private JFXButton botonIniciarSesion;
@@ -65,6 +71,105 @@ public class FXMLDocumentController implements Initializable, DraggedScene {
 
     @FXML
     private Hyperlink regresar;
+    
+    @FXML
+    private JFXButton crearCuenta1;
+
+    @FXML
+    private JFXButton crearCuenta11;
+
+    @FXML
+    private JFXTextField c_cedula;
+
+    @FXML
+    private JFXTextField c_nombres;
+
+    @FXML
+    private JFXTextField c_apellidos;
+
+    @FXML
+    private JFXTextField c_edad;
+
+    @FXML
+    private JFXTextField c_telefono;
+
+    @FXML
+    private JFXTextField c_correo;
+
+    @FXML
+    private JFXPasswordField c_contraseña;
+
+    @FXML
+    private JFXPasswordField c_repetirContraseña;
+
+    @FXML
+    private JFXButton crearCuenta111;
+
+    @FXML
+    private Hyperlink regresar1;
+
+    @FXML
+    private JFXTextField v_cedula;
+
+    @FXML
+    private JFXTextField v_nombres;
+
+    @FXML
+    private JFXTextField v_apellidos;
+
+    @FXML
+    private JFXTextField v_nomTienda;
+
+    @FXML
+    private JFXTextField v_telefono;
+
+    @FXML
+    private JFXTextField v_correo;
+
+    @FXML
+    private JFXPasswordField v_contraseña;
+
+    @FXML
+    private JFXPasswordField v_repetircontraseña;
+
+    @FXML
+    private JFXTextField v_ruc;
+    
+    public static String tipoUser;
+    
+    @FXML
+    void registrarComprador(ActionEvent event) {
+        if (c_contraseña.getText().equals(c_repetirContraseña)) {
+            Usuario user = new Usuario();
+            user.RegistrarUsuarioComprador(c_cedula, c_nombres, c_apellidos, tipoUser, c_edad, c_telefono, c_correo, c_contraseña);
+        }
+        
+    }
+
+    @FXML
+    void registrarVendedor(ActionEvent event) {
+        if (v_contraseña.getText().equals(v_repetircontraseña)) {
+            Usuario user = new Usuario();
+            user.RegistrarUsuarioVendedor(v_cedula, v_nombres, v_apellidos, tipoUser, v_nomTienda, v_telefono, v_ruc, v_correo, v_contraseña);
+        }
+    }
+    
+    Screen2Controller sc;
+    @FXML
+    void iniciarSesionAcceso(ActionEvent event) {
+        try {
+            sc = new Screen2Controller();
+            
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Screen2.fxml"));
+            Parent root1 = (Parent) fxmlLoader.load();
+            Stage stage = new Stage();
+            stage.initStyle(StageStyle.UNDECORATED);
+            stage.setScene(new Scene(root1));
+            stage.show();
+        } catch (Exception ex) {
+
+        }
+    }
     
     @FXML
     private void AccionCerrar(ActionEvent event) {

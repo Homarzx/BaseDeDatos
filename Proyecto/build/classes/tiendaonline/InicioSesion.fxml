@@ -31,7 +31,7 @@
          <children>
             <JFXTextField focusColor="WHITE" layoutX="18.0" layoutY="81.0" prefHeight="25.0" prefWidth="237.0" style="-fx-text-fill: WHITE;" unFocusColor="#575757" />
             <JFXPasswordField focusColor="WHITE" layoutX="18.0" layoutY="147.0" prefHeight="25.0" prefWidth="237.0" style="-fx-text-fill: WHITE;" unFocusColor="#575757" />
-            <JFXButton id="iniciar" buttonType="RAISED" layoutX="18.0" layoutY="185.0" prefHeight="33.0" prefWidth="237.0" ripplerFill="WHITE" stylesheets="@../Styles/EstiloBoton.css" text="Iniciar sesión" textAlignment="CENTER" textFill="WHITE">
+            <JFXButton id="iniciar" fx:id="botonIniciarSesion" buttonType="RAISED" layoutX="18.0" layoutY="185.0" prefHeight="33.0" prefWidth="237.0" ripplerFill="WHITE" stylesheets="@../Styles/EstiloBoton.css" text="Iniciar sesión" textAlignment="CENTER" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
