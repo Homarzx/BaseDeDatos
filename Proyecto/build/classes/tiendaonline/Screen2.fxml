@@ -2,6 +2,7 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Hyperlink?>
@@ -40,7 +41,7 @@
                                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                  </rowConstraints>
                                  <children>
-                                    <TextField onMouseEntered="#restaurarOpacidad" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                                    <TextField fx:id="textBuscar5" onMouseEntered="#restaurarOpacidad" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                                        <GridPane.margin>
                                           <Insets right="70.0" />
                                        </GridPane.margin>
@@ -352,7 +353,7 @@
             </AnchorPane>
          </content>
       </ScrollPane>
-      <ScrollPane fx:id="scrollPanelWishList" fitToHeight="true" fitToWidth="true" pannable="true" prefHeight="200.0" prefWidth="200.0" stylesheets="@../Styles/EstiloBoton.css" visible="false">
+      <ScrollPane fx:id="scrollPanelCompra" fitToHeight="true" fitToWidth="true" pannable="true" prefHeight="200.0" prefWidth="200.0" stylesheets="@../Styles/EstiloBoton.css">
          <content>
             <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #17202A;">
                <children>
@@ -371,7 +372,7 @@
                                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                  </rowConstraints>
                                  <children>
-                                    <TextField onMouseEntered="#restaurarOpacidad" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                                    <TextField fx:id="textBuscar4" onMouseEntered="#restaurarOpacidad" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                                        <GridPane.margin>
                                           <Insets right="70.0" />
                                        </GridPane.margin>
@@ -588,7 +589,116 @@
                               </GridPane>
                            </children>
                         </AnchorPane>
-                        <VBox fx:id="vboxProductos11" alignment="CENTER" onMouseEntered="#restaurarOpacidad" prefHeight="200.0" prefWidth="700.0" spacing="15.0" style="-fx-background-color: #EAECEE;" />
+                        <VBox fx:id="vboxProductos11" alignment="CENTER" onMouseEntered="#restaurarOpacidad" prefHeight="200.0" prefWidth="700.0" spacing="15.0" style="-fx-background-color: #EAECEE;">
+                           <children>
+                              <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                 <children>
+                                    <Label text="DATOS UBICACIÓN:" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="10.0">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                                       <children>
+                                          <VBox alignment="CENTER" minWidth="-Infinity" prefWidth="600.0" spacing="5.0">
+                                             <children>
+                                                <HBox prefHeight="45.0" prefWidth="123.0" spacing="20.0">
+                                                   <children>
+                                                      <Label minHeight="-Infinity" minWidth="-Infinity" text="Pais: " textAlignment="CENTER">
+                                                         <font>
+                                                            <Font size="14.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <JFXTextField />
+                                                   </children>
+                                                </HBox>
+                                                <HBox prefHeight="100.0" prefWidth="187.0" spacing="20.0">
+                                                   <children>
+                                                      <Label text="Ciudad: " textAlignment="CENTER">
+                                                         <font>
+                                                            <Font size="14.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <JFXTextField />
+                                                   </children>
+                                                </HBox>
+                                                <HBox prefHeight="100.0" prefWidth="187.0" spacing="20.0">
+                                                   <children>
+                                                      <Label text="Sector: " textAlignment="CENTER">
+                                                         <font>
+                                                            <Font size="14.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <JFXTextField />
+                                                   </children>
+                                                </HBox>
+                                                <HBox prefHeight="100.0" prefWidth="187.0" spacing="20.0">
+                                                   <children>
+                                                      <Label text="Calle: " textAlignment="CENTER">
+                                                         <font>
+                                                            <Font size="14.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <JFXTextField />
+                                                   </children>
+                                                </HBox>
+                                                <HBox prefHeight="100.0" prefWidth="187.0" spacing="20.0">
+                                                   <children>
+                                                      <Label text="Manzana: " textAlignment="CENTER">
+                                                         <font>
+                                                            <Font size="14.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <JFXTextField />
+                                                   </children>
+                                                </HBox>
+                                                <HBox prefHeight="100.0" prefWidth="187.0" spacing="20.0">
+                                                   <children>
+                                                      <Label text="Villa: " textAlignment="CENTER">
+                                                         <font>
+                                                            <Font size="14.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <JFXTextField />
+                                                   </children>
+                                                </HBox>
+                                                <HBox prefHeight="100.0" prefWidth="187.0" spacing="20.0">
+                                                   <children>
+                                                      <Label text="Codigo Postal:" textAlignment="CENTER">
+                                                         <font>
+                                                            <Font size="14.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <JFXTextField />
+                                                   </children>
+                                                </HBox>
+                                             </children>
+                                             <HBox.margin>
+                                                <Insets bottom="50.0" top="50.0" />
+                                             </HBox.margin>
+                                          </VBox>
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                 <children>
+                                    <Label text="DATOS TARJETA (DEBITO O CRÉDITO):" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="10.0">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </AnchorPane>
+                              <JFXButton style="-fx-background-color: yellow;" text="Finalizar Compra">
+                                 <font>
+                                    <Font name="System Bold" size="18.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets bottom="10.0" />
+                                 </VBox.margin>
+                              </JFXButton>
+                           </children></VBox>
                         <AnchorPane fx:id="panelBotton111" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="200.0" style="-fx-background-color: #17202A;">
                            <children>
                               <AnchorPane prefHeight="430.0" prefWidth="200.0" style="-fx-background-color: #2E4053;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
@@ -702,7 +812,7 @@
                                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                  </rowConstraints>
                                  <children>
-                                    <TextField onMouseEntered="#restaurarOpacidad" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                                    <TextField fx:id="textBuscar3" onMouseEntered="#restaurarOpacidad" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                                        <GridPane.margin>
                                           <Insets right="70.0" />
                                        </GridPane.margin>
@@ -925,12 +1035,18 @@
                                  <children>
                                     <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="15.0" style="-fx-background-color: #EBEDEF;" AnchorPane.bottomAnchor="70.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
                                        <children>
-                                          <Label text="Subtotal (# productos): $$" textAlignment="CENTER" wrapText="true">
+                                          <Label fx:id="labelSubtotal" text="Subtotal (0): $ 0.0" textAlignment="CENTER" wrapText="true">
                                              <font>
                                                 <Font name="Arial" size="18.0" />
                                              </font>
                                           </Label>
-                                          <JFXButton alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: yellow;" text="Proceder al pago" textAlignment="CENTER" />
+                                          <JFXButton alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" onAction="#procederAlPago" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: yellow;" text="Proceder al pago" textAlignment="CENTER">
+                                             <font>
+                                                <Font name="System Bold Italic" size="12.0" />
+                                             </font>
+                                             <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                             </cursor></JFXButton>
                                        </children>
                                        <padding>
                                           <Insets top="10.0" />
@@ -1073,7 +1189,7 @@
                                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                  </rowConstraints>
                                  <children>
-                                    <TextField onMouseEntered="#restaurarOpacidad" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                                    <TextField fx:id="textBuscar2" onMouseEntered="#restaurarOpacidad" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                                        <GridPane.margin>
                                           <Insets right="70.0" />
                                        </GridPane.margin>
@@ -1085,6 +1201,9 @@
                                        <image>
                                           <Image url="@../Recursos_Graficos/lupa.png" />
                                        </image>
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
                                     </ImageView>
                                     <HBox onMouseEntered="#restaurarOpacidad" prefHeight="100.0" prefWidth="200.0" spacing="10.0" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
                                        <children>
@@ -1382,7 +1501,7 @@
             </AnchorPane>
          </content>
       </ScrollPane>
-      <ScrollPane fx:id="scrollPanel1" fitToHeight="true" fitToWidth="true" pannable="true" prefHeight="200.0" prefWidth="200.0" stylesheets="@../Styles/EstiloBoton.css">
+      <ScrollPane fx:id="scrollPanel1" fitToHeight="true" fitToWidth="true" pannable="true" prefHeight="200.0" prefWidth="200.0" stylesheets="@../Styles/EstiloBoton.css" visible="false">
          <content>
             <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #17202A;">
                <children>
@@ -1787,11 +1906,17 @@
                                              <font>
                                                 <Font name="System Bold" size="12.0" />
                                              </font>
+                                             <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                             </cursor>
                                           </JFXButton>
                                           <JFXButton onMouseClicked="#cerrarSesion" prefHeight="25.0" prefWidth="114.0" style="-fx-background-color: black;" text="Cerrar Sesion" textAlignment="CENTER" textFill="WHITE">
                                              <font>
                                                 <Font name="System Bold" size="12.0" />
                                              </font>
+                                             <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                             </cursor>
                                           </JFXButton>
                                        </children>
                                     </VBox>

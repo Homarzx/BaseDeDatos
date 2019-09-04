@@ -9,6 +9,9 @@ import Conectar.Conexion;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Insets;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -24,6 +27,8 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
+import javafx.scene.Cursor;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -38,6 +43,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javax.swing.JOptionPane;
 import static tiendaonline.InicioSesionController.nomUsuario;
 import static tiendaonline.InicioSesionController.pagina;
 import static tiendaonline.InicioSesionController.tipoUser;
@@ -126,7 +132,7 @@ public class Screen2Controller implements Initializable {
     private JFXButton botonInicio1111;
 
     @FXML
-    private ScrollPane scrollPanelWishList;
+    private ScrollPane scrollPanelCompra;
 
     @FXML
     private VBox vboxpanel211;
@@ -308,27 +314,198 @@ public class Screen2Controller implements Initializable {
     @FXML
     private TextField textBuscar;
 
-    private String txtProducto;
+    @FXML
+    private TextField textBuscar2;
 
     @FXML
+    private TextField textBuscar3;
+
+    @FXML
+    private TextField textBuscar4;
+
+    @FXML
+    private TextField textBuscar5;
+    
+    @FXML
+    private Label labelSubtotal;
+
+    //private String txtProducto;
+    
+    HBox agregarAlcarrito;
+    int conteo = -1;
+    int cantidadProducto = 0;
+    double precioProductosAcumulados = 0.0;
+    @FXML
     void BuscarProducto(MouseEvent event) {
+        //llenarSet();
+        //autoCompletar();
+        vboxProductos.getChildren().clear();
+        vboxProductos.setStyle("-fx-background-color:  white");
+        Producto pro = new Producto();
         //vboxProductos
         //\\ImagenesProductos\\001.jpg
-        HBox contenerInfo = new HBox();
-        contenerInfo.setSpacing(20.0);
-        ImageView imagen = new ImageView();
-        imagen.setImage(new Image("\\ImagenesProductos\\\\001.jpg"));
-        txtProducto = textBuscar.getText();
-        scrollPanel2.setVisible(true);
-        scrollPanel1.setVisible(false);
-        scrollPanelCarrito.setVisible(false);
+        try {
+            String nombreUsuarioTexto = textBuscar.getText();
+            vboxProductos.setSpacing(30);
+            HBox contenerInfo = new HBox();
+            contenerInfo.setSpacing(20.0);
+            ImageView imagen = new ImageView();
+            Image img = new Image(pro.DevolverNombreUsuario(retornarId(nombreUsuarioTexto)));
+            imagen.setFitWidth(320);
+            imagen.setPreserveRatio(true);
+            imagen.setSmooth(true);
+            imagen.setCache(true);
+            imagen.setImage(img);
+            contenerInfo.getChildren().add(imagen);
+
+            String[] lista = retornarDescripcionesInfo(nombreUsuarioTexto);
+            VBox miniVbox = new VBox();
+            VBox miniVbox2 = new VBox();
+            Label nom = new Label();
+            Label precio = new Label();
+            Label cantidad = new Label();
+            
+            Label nom2 = new Label();
+            Label precio2 = new Label();
+            Label cantidad2 = new Label();
+
+            JFXButton boton = new JFXButton("Agregar al Carrito");
+            boton.setFont(new javafx.scene.text.Font("Arial", 20));
+            boton.setStyle("-fx-font-weight: bold");
+            boton.setStyle("-fx-background-color:  yellow");
+            boton.setCursor(Cursor.HAND);
+            boton.setOnAction(new EventHandler() {
+                @Override
+                public void handle(Event event) {
+                    System.out.println("AGREGA AL CARRITO");
+                    agregarAlcarrito.setSpacing(20);
+                    agregarAlcarrito.setPadding(new javafx.geometry.Insets(10, 10, 10, 10));
+                    agregarAlcarrito.setAlignment(Pos.CENTER);
+                    vBoxProductosCarrito.getChildren().add(agregarAlcarrito);
+                    JOptionPane.showMessageDialog(null, "PRODUCTO AGREGADO AL CARRITO CON ÉXITO!");
+                    lista[1] = String.valueOf(Integer.valueOf(lista[1]) - 1);
+                    cantidadProducto +=1;
+                    precioProductosAcumulados +=Double.valueOf(lista[0]);
+                    conteo+=1;
+                    labelSubtotal.setText("Subtotal ( "+cantidadProducto+" ) : $ "+String.format("%.2f", precioProductosAcumulados));
+                }
+            });
+            
+            JFXButton boton2 = new JFXButton("Eliminar del Carrito");
+            boton2.setFont(new javafx.scene.text.Font("Arial", 20));
+            boton2.setStyle("-fx-font-weight: bold");
+            boton2.setStyle("-fx-background-color:  red");
+            boton2.setCursor(Cursor.HAND);
+            boton2.setOnAction(new EventHandler() {
+                @Override
+                public void handle(Event event) {
+                    System.out.println("ELIMINADO DEL CARRITO");
+                    vBoxProductosCarrito.getChildren().remove(conteo);
+                    conteo-=1;
+                    cantidadProducto -=1;
+                    precioProductosAcumulados -=Double.valueOf(lista[0]);
+                    lista[1] = String.valueOf(Integer.valueOf(lista[1]) - 1);
+                    labelSubtotal.setText("Subtotal ( "+cantidadProducto+" ) : $ "+String.format("%.2f", precioProductosAcumulados));
+                    //agregarAlcarrito.setSpacing(20);
+                    //agregarAlcarrito.setPadding(new javafx.geometry.Insets(10, 10, 10, 10));
+                    //agregarAlcarrito.setAlignment(Pos.CENTER);
+                    //vBoxProductosCarrito.getChildren().add(agregarAlcarrito);
+                }
+            });
+
+            nom.setText(nombreUsuarioTexto.toUpperCase());
+            precio.setText("$ " + lista[0]);
+            cantidad.setText("Stock: " + lista[1]);
+
+            nom.setFont(new javafx.scene.text.Font("Arial", 24));
+            nom.setStyle("-fx-font-weight: bold");
+            precio.setFont(new javafx.scene.text.Font("Arial", 24));
+            cantidad.setFont(new javafx.scene.text.Font("Arial", 18));
+
+            miniVbox.getChildren().addAll(nom, precio, cantidad,boton);
+            
+            nom2.setText(nombreUsuarioTexto.toUpperCase());
+            precio2.setText("$ " + lista[0]);
+            cantidad2.setText("Stock: " + lista[1]);
+
+            nom2.setFont(new javafx.scene.text.Font("Arial", 24));
+            nom2.setStyle("-fx-font-weight: bold");
+            precio2.setFont(new javafx.scene.text.Font("Arial", 24));
+            cantidad2.setFont(new javafx.scene.text.Font("Arial", 18));
+
+            miniVbox2.getChildren().addAll(nom2, precio2, cantidad2,boton2);
+            
+            agregarAlcarrito = new HBox();
+            ImageView imagen2 = new ImageView();
+            Image im = new Image(pro.DevolverNombreUsuario(retornarId(nombreUsuarioTexto)));
+            imagen2.setFitWidth(320);
+            imagen2.setPreserveRatio(true);
+            imagen2.setSmooth(true);
+            imagen2.setCache(true);
+            imagen2.setImage(im);
+            miniVbox2.setSpacing(10);
+            agregarAlcarrito.getChildren().addAll(imagen2,miniVbox2);
+            miniVbox.setSpacing(10);
+            contenerInfo.setPadding(new javafx.geometry.Insets(10, 10, 10, 10));
+            contenerInfo.setAlignment(Pos.CENTER);
+            contenerInfo.getChildren().add(miniVbox);
+
+            vboxProductos.getChildren().add(contenerInfo);
+
+            scrollPanel2.setVisible(true);
+            scrollPanel1.setVisible(false);
+            scrollPanelCarrito.setVisible(false);
+            scrollPanelCompra.setVisible(false);
+            //llenarSet();
+            //autoCompletar();
+
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "INGRESE EL NOMBRE DE PRODUCTO PARA BUSCAR");
+            //scrollPanel2.setVisible(true);
+        }
+
     }
 
+    public String retornarId(String nombre) {
+        String id = "";
+
+        for (int i = 0; i < listaIdProductos.size(); i++) {
+            if (listaIdProductos.get(i)[0].equals(nombre)) {
+                id = listaIdProductos.get(i)[1];
+            }
+        }
+
+        return id;
+    }
+
+    public String[] retornarDescripcionesInfo(String nombre) {
+        String[] descrip = new String[2];
+
+        for (int i = 0; i < listaIdProductos.size(); i++) {
+            if (listaIdProductos.get(i)[0].equals(nombre)) {
+                descrip[0] = listaIdProductos.get(i)[2];
+                descrip[1] = listaIdProductos.get(i)[3];
+
+            }
+        }
+
+        return descrip;
+    }
+    
+    @FXML
+    void procederAlPago(ActionEvent event) {
+        scrollPanelCompra.setVisible(true);
+        scrollPanel1.setVisible(false);
+        scrollPanel2.setVisible(false);
+        scrollPanelCarrito.setVisible(false);
+    }
+    
     @FXML
     void pagPrincipal(MouseEvent event) {
         scrollPanel1.setVisible(true);
         scrollPanel2.setVisible(false);
         scrollPanelCarrito.setVisible(false);
+        scrollPanelCompra.setVisible(false);
     }
 
     @FXML
@@ -336,6 +513,7 @@ public class Screen2Controller implements Initializable {
         scrollPanelCarrito.setVisible(true);
         scrollPanel1.setVisible(false);
         scrollPanel2.setVisible(false);
+        scrollPanelCompra.setVisible(false);
     }
 
     @FXML
@@ -369,8 +547,6 @@ public class Screen2Controller implements Initializable {
         }
 
     }
-    
-    
 
     double hboxcont0 = 0;
 
@@ -452,11 +628,12 @@ public class Screen2Controller implements Initializable {
     }
     public static Stage iniciadoSesion;
     public static Stage stageActual;
+
     @FXML
     void cerrarSesion(MouseEvent event) {
         vboxCuentaLista.setVisible(false);
         iniSesionSegura.setDisable(false);
-        
+
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Screen2.fxml"));
             Parent root1 = (Parent) fxmlLoader.load();
@@ -497,10 +674,9 @@ public class Screen2Controller implements Initializable {
         vboxpanel1.setStyle("-fx-background-color:  #eaecee");
         vboxpanel2.setStyle("-fx-background-color:  #17202A");
         departClick.hide();
-        
 
     }
-    
+
     @FXML
     void eliminarSubMenu(MouseEvent event) {
         vboxCuentaLista.setVisible(false);
@@ -586,8 +762,31 @@ public class Screen2Controller implements Initializable {
             }
         });
 
+        textBuscar2.setOnKeyReleased(new EventHandler() {
+            @Override
+            public void handle(Event event) {
+                String to_check = textBuscar2.getText();
+                int to_check_len = to_check.length();
+                for (String data : treeSet) {
+                    String check_from_data = "";
+                    for (int i = 0; i < to_check_len; i++) {
+                        if (to_check_len <= data.length()) {
+                            check_from_data = check_from_data + data.charAt(i);
+                        }
+                    }
+                    if (check_from_data.equals(to_check) && !check_from_data.equals("")) {
+                        textBuscar2.setText(data);
+                        //textBuscar.setSelectionStart(to_check_len);
+                        //textBuscar.setSelectionEnd(data.length());
+                        break;
+                    }
+                }
+            }
+        });
+
     }
     ArrayList<String[]> listaIdProductos = new ArrayList<String[]>();
+
     private void llenarSet() {
         treeSet = new TreeSet();
         ResultSet rs;
@@ -601,10 +800,13 @@ public class Screen2Controller implements Initializable {
             rs = pst.executeQuery();
             rs.next();
             while (rs.isAfterLast() != true) {
-                String[] listaTemporal = new String[2];
+                String[] listaTemporal = new String[4];
                 String t = rs.getString("nombre");
                 listaTemporal[0] = t;
                 listaTemporal[1] = rs.getString("idProducto");
+                listaTemporal[2] = rs.getString("precio");
+                listaTemporal[3] = rs.getString("cantidad");
+
                 listaIdProductos.add(listaTemporal);
                 treeSet.add(t);
                 rs.next();
@@ -646,6 +848,7 @@ public class Screen2Controller implements Initializable {
         cuentayLista.setDisable(true);
         labelvender.setDisable(true);
         vboxCuentaLista.setVisible(false);
+        vBoxProductosCarrito.setStyle("-fx-background-color:  white");
     }
 
 }
