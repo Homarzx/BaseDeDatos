@@ -78,23 +78,21 @@
             </Label>
             <Hyperlink id="regresar" fx:id="regresar" layoutX="107.0" layoutY="348.0" onAction="#regresarPanel2" stylesheets="@../Styles/EstiloBoton.css" text="Regresar" textAlignment="CENTER" textFill="#9ccfff" underline="true" />
             <Label layoutX="16.0" layoutY="46.0" text="CI o pasaporte:" textFill="WHITE" />
-            <JFXTextField focusColor="WHITE" layoutX="107.0" layoutY="36.0" prefHeight="25.0" prefWidth="140.0" style="-fx-text-fill: #40affc;" unFocusColor="#575757" />
+            <JFXTextField fx:id="c_cedula" focusColor="WHITE" layoutX="107.0" layoutY="36.0" prefHeight="25.0" prefWidth="140.0" style="-fx-text-fill: #40affc;" unFocusColor="#575757" />
             <Label layoutX="16.0" layoutY="78.0" text="Nombres:" textFill="WHITE" />
             <Label layoutX="16.0" layoutY="112.0" text="Apellidos:" textFill="WHITE" />
-            <JFXTextField focusColor="WHITE" layoutX="75.0" layoutY="69.0" prefHeight="25.0" prefWidth="178.0" style="-fx-text-fill: #40affc;" unFocusColor="#575757" />
-            <JFXTextField focusColor="WHITE" layoutX="75.0" layoutY="103.0" prefHeight="25.0" prefWidth="178.0" style="-fx-text-fill: #40affc;" unFocusColor="#575757" />
+            <JFXTextField fx:id="c_nombres" focusColor="WHITE" layoutX="75.0" layoutY="69.0" prefHeight="25.0" prefWidth="178.0" style="-fx-text-fill: #40affc;" unFocusColor="#575757" />
+            <JFXTextField fx:id="c_apellidos" focusColor="WHITE" layoutX="75.0" layoutY="103.0" prefHeight="25.0" prefWidth="178.0" style="-fx-text-fill: #40affc;" unFocusColor="#575757" />
             <Label layoutX="17.0" layoutY="142.0" text="Edad:" textFill="WHITE" />
-            <JFXTextField focusColor="WHITE" layoutX="51.0" layoutY="132.0" prefHeight="25.0" prefWidth="77.0" style="-fx-text-fill: #40affc;" unFocusColor="#575757" />
+            <JFXTextField fx:id="c_edad" focusColor="WHITE" layoutX="51.0" layoutY="132.0" prefHeight="25.0" prefWidth="77.0" style="-fx-text-fill: #40affc;" unFocusColor="#575757" />
             <Label layoutX="17.0" layoutY="171.0" text="Teléfono:" textFill="WHITE" />
-            <JFXTextField focusColor="WHITE" layoutX="71.0" layoutY="160.0" prefHeight="25.0" prefWidth="171.0" style="-fx-text-fill: #40affc;" unFocusColor="#575757" />
-            <Label layoutX="17.0" layoutY="201.0" text="Usuario:" textFill="WHITE" />
-            <Label layoutX="17.0" layoutY="255.0" text="Contraseña:" textFill="WHITE" />
-            <Label layoutX="17.0" layoutY="283.0" text="Repetir contraseña:" textFill="WHITE" />
-            <Label layoutX="17.0" layoutY="227.0" text="Correo:" textFill="WHITE" />
-            <JFXTextField focusColor="WHITE" layoutX="65.0" layoutY="192.0" prefHeight="25.0" prefWidth="178.0" style="-fx-text-fill: #40affc;" unFocusColor="#575757" />
-            <JFXTextField focusColor="WHITE" layoutX="61.0" layoutY="217.0" prefHeight="25.0" prefWidth="178.0" style="-fx-text-fill: #40affc;" unFocusColor="#575757" />
-            <JFXPasswordField focusColor="WHITE" layoutX="88.0" layoutY="244.0" prefHeight="25.0" prefWidth="126.0" style="-fx-text-fill: WHITE;" unFocusColor="#575757" />
-            <JFXPasswordField focusColor="WHITE" layoutX="123.0" layoutY="272.0" prefHeight="25.0" prefWidth="126.0" style="-fx-text-fill: WHITE;" unFocusColor="#575757" />
+            <JFXTextField fx:id="c_telefono" focusColor="WHITE" layoutX="71.0" layoutY="160.0" prefHeight="25.0" prefWidth="171.0" style="-fx-text-fill: #40affc;" unFocusColor="#575757" />
+            <Label layoutX="17.0" layoutY="245.0" text="Contraseña:" textFill="WHITE" />
+            <Label layoutX="17.0" layoutY="273.0" text="Repetir contraseña:" textFill="WHITE" />
+            <Label layoutX="17.0" layoutY="217.0" text="Correo:" textFill="WHITE" />
+            <JFXTextField fx:id="c_correo" focusColor="WHITE" layoutX="61.0" layoutY="207.0" prefHeight="25.0" prefWidth="178.0" style="-fx-text-fill: #40affc;" unFocusColor="#575757" />
+            <JFXPasswordField fx:id="c_contraseña" focusColor="WHITE" layoutX="88.0" layoutY="234.0" prefHeight="25.0" prefWidth="126.0" style="-fx-text-fill: WHITE;" unFocusColor="#575757" />
+            <JFXPasswordField fx:id="c_repetirContraseña" focusColor="WHITE" layoutX="123.0" layoutY="262.0" prefHeight="25.0" prefWidth="126.0" style="-fx-text-fill: WHITE;" unFocusColor="#575757" />
          </children>
       </AnchorPane>
       <AnchorPane id="panel4" fx:id="panel4" layoutX="452.0" layoutY="62.0" prefHeight="385.0" prefWidth="269.0" style="-fx-background-color: rgba(0, 0, 0, 0.3);" visible="false">
@@ -107,25 +105,23 @@
             </Label>
             <Hyperlink id="regresar" fx:id="regresar1" layoutX="107.0" layoutY="348.0" onAction="#regresarPanel2" stylesheets="@../Styles/EstiloBoton.css" text="Regresar" textAlignment="CENTER" textFill="#9ccfff" underline="true" />
             <Label layoutX="16.0" layoutY="46.0" text="CI o pasaporte:" textFill="WHITE" />
-            <JFXTextField focusColor="WHITE" layoutX="107.0" layoutY="36.0" prefHeight="25.0" prefWidth="148.0" style="-fx-text-fill: #40affc;" unFocusColor="#575757" />
+            <JFXTextField fx:id="v_cedula" focusColor="WHITE" layoutX="107.0" layoutY="36.0" prefHeight="25.0" prefWidth="148.0" style="-fx-text-fill: #40affc;" unFocusColor="#575757" />
             <Label layoutX="16.0" layoutY="71.0" text="Nombres:" textFill="WHITE" />
             <Label layoutX="16.0" layoutY="96.0" text="Apellidos:" textFill="WHITE" />
-            <JFXTextField focusColor="WHITE" layoutX="75.0" layoutY="60.0" prefHeight="25.0" prefWidth="178.0" style="-fx-text-fill: #40affc;" unFocusColor="#575757" />
-            <JFXTextField focusColor="WHITE" layoutX="75.0" layoutY="85.0" prefHeight="25.0" prefWidth="178.0" style="-fx-text-fill: #40affc;" unFocusColor="#575757" />
+            <JFXTextField fx:id="v_nombres" focusColor="WHITE" layoutX="75.0" layoutY="60.0" prefHeight="25.0" prefWidth="178.0" style="-fx-text-fill: #40affc;" unFocusColor="#575757" />
+            <JFXTextField fx:id="v_apellidos" focusColor="WHITE" layoutX="75.0" layoutY="85.0" prefHeight="25.0" prefWidth="178.0" style="-fx-text-fill: #40affc;" unFocusColor="#575757" />
             <Label layoutX="17.0" layoutY="123.0" text="Nombre tienda:" textFill="WHITE" />
-            <JFXTextField focusColor="WHITE" layoutX="105.0" layoutY="112.0" prefHeight="25.0" prefWidth="148.0" style="-fx-text-fill: #40affc;" unFocusColor="#575757" />
+            <JFXTextField fx:id="v_nomTienda" focusColor="WHITE" layoutX="105.0" layoutY="112.0" prefHeight="25.0" prefWidth="148.0" style="-fx-text-fill: #40affc;" unFocusColor="#575757" />
             <Label layoutX="17.0" layoutY="147.0" text="Teléfono:" textFill="WHITE" />
-            <JFXTextField focusColor="WHITE" layoutX="71.0" layoutY="136.0" prefHeight="25.0" prefWidth="178.0" style="-fx-text-fill: #40affc;" unFocusColor="#575757" />
-            <Label layoutX="17.0" layoutY="201.0" text="Usuario:" textFill="WHITE" />
-            <Label layoutX="17.0" layoutY="255.0" text="Contraseña:" textFill="WHITE" />
-            <Label layoutX="17.0" layoutY="283.0" text="Repetir contraseña:" textFill="WHITE" />
-            <Label layoutX="17.0" layoutY="227.0" text="Correo:" textFill="WHITE" />
-            <JFXTextField focusColor="WHITE" layoutX="65.0" layoutY="192.0" prefHeight="25.0" prefWidth="171.0" style="-fx-text-fill: #40affc;" unFocusColor="#575757" />
-            <JFXTextField focusColor="WHITE" layoutX="61.0" layoutY="217.0" prefHeight="25.0" prefWidth="178.0" style="-fx-text-fill: #40affc;" unFocusColor="#575757" />
-            <JFXPasswordField focusColor="WHITE" layoutX="88.0" layoutY="244.0" prefHeight="25.0" prefWidth="126.0" style="-fx-text-fill: WHITE;" unFocusColor="#575757" />
-            <JFXPasswordField focusColor="WHITE" layoutX="123.0" layoutY="272.0" prefHeight="25.0" prefWidth="126.0" style="-fx-text-fill: WHITE;" unFocusColor="#575757" />
+            <JFXTextField fx:id="v_telefono" focusColor="WHITE" layoutX="71.0" layoutY="136.0" prefHeight="25.0" prefWidth="178.0" style="-fx-text-fill: #40affc;" unFocusColor="#575757" />
+            <Label layoutX="17.0" layoutY="245.0" text="Contraseña:" textFill="WHITE" />
+            <Label layoutX="17.0" layoutY="273.0" text="Repetir contraseña:" textFill="WHITE" />
+            <Label layoutX="17.0" layoutY="217.0" text="Correo:" textFill="WHITE" />
+            <JFXTextField fx:id="v_correo" focusColor="WHITE" layoutX="61.0" layoutY="207.0" prefHeight="25.0" prefWidth="178.0" style="-fx-text-fill: #40affc;" unFocusColor="#575757" />
+            <JFXPasswordField fx:id="v_contraseña" focusColor="WHITE" layoutX="88.0" layoutY="234.0" prefHeight="25.0" prefWidth="126.0" style="-fx-text-fill: WHITE;" unFocusColor="#575757" />
+            <JFXPasswordField fx:id="v_repetircontraseña" focusColor="WHITE" layoutX="123.0" layoutY="262.0" prefHeight="25.0" prefWidth="126.0" style="-fx-text-fill: WHITE;" unFocusColor="#575757" />
             <Label layoutX="18.0" layoutY="171.0" text="RUC:" textFill="WHITE" />
-            <JFXTextField focusColor="WHITE" layoutX="48.0" layoutY="160.0" prefHeight="25.0" prefWidth="202.0" style="-fx-text-fill: #40affc;" unFocusColor="#575757" />
+            <JFXTextField fx:id="v_ruc" focusColor="WHITE" layoutX="48.0" layoutY="160.0" prefHeight="25.0" prefWidth="202.0" style="-fx-text-fill: #40affc;" unFocusColor="#575757" />
          </children>
       </AnchorPane>
    </children>

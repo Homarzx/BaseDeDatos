@@ -70,7 +70,7 @@ public class Screen2Controller implements Initializable {
     private Label labelvender;
 
     public void getLabelVender() {
-        labelvender.setDisable(true);
+        labelvender.setDisable(false);
     }
 
     @FXML
@@ -311,7 +311,7 @@ public class Screen2Controller implements Initializable {
 
     @FXML
     void BuscarProducto(MouseEvent event) {
-
+        //vboxProductos
         txtProducto = textBuscar.getText();
         scrollPanel2.setVisible(true);
         scrollPanel1.setVisible(false);
@@ -363,6 +363,8 @@ public class Screen2Controller implements Initializable {
         }
 
     }
+    
+    //\\ImagenesProductos\\001.jpg
 
     double hboxcont0 = 0;
 

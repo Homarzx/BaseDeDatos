@@ -1783,10 +1783,21 @@
                                                 <Font name="System Bold" size="12.0" />
                                              </font>
                                           </JFXButton>
-                                          <JFXButton onMouseClicked="#cerrarSesion" prefHeight="25.0" prefWidth="114.0" text="Cerrar Sesion" textAlignment="CENTER" textFill="WHITE">
+                                          <JFXButton onMouseClicked="#abrirWishList" prefHeight="25.0" prefWidth="114.0" style="-fx-background-color: red;" text="Eliminar Cuenta" textAlignment="CENTER" textFill="WHITE">
                                              <font>
                                                 <Font name="System Bold" size="12.0" />
                                              </font>
+                                             <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                             </cursor>
+                                          </JFXButton>
+                                          <JFXButton onMouseClicked="#cerrarSesion" prefHeight="25.0" prefWidth="114.0" style="-fx-background-color: black;" text="Cerrar Sesion" textAlignment="CENTER" textFill="WHITE">
+                                             <font>
+                                                <Font name="System Bold" size="12.0" />
+                                             </font>
+                                             <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                             </cursor>
                                           </JFXButton>
                                        </children>
                                     </VBox>
