@@ -201,6 +201,8 @@ public class InicioSesionController implements Initializable, DraggedScene {
             }
         } else if (lista[2].equals('0')) {
             JOptionPane.showMessageDialog(null, "USUARIO NO REGISTRADO");
+        }else{
+            JOptionPane.showMessageDialog(null, "DATOS INCORRECTOS");
         }
 
     }
@@ -271,27 +273,7 @@ public class InicioSesionController implements Initializable, DraggedScene {
         fade.play();
     }
 
-    private void verificarDatos() {
-        String correo;
-        String password;
-        ResultSet rs;
-        Connection cn = null;
-        try {
-            Conexion con = new Conexion();
-            cn = con.conectar();
-            String sql = "";
-            PreparedStatement pst = cn.prepareCall(sql);
-            rs = pst.executeQuery();
-            rs.next();
-            while (rs.isAfterLast() != true) {
-                String t = rs.getString("nombre");
-                rs.next();
-            }
-
-        } catch (SQLException e) {
-            System.err.println(e);
-        }
-    }
+    
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {

@@ -70,7 +70,7 @@
       </AnchorPane>
       <AnchorPane id="panel3" fx:id="panel3" layoutX="452.0" layoutY="62.0" prefHeight="385.0" prefWidth="269.0" style="-fx-background-color: rgba(0, 0, 0, 0.3);" visible="false">
          <children>
-            <JFXButton id="comprador" fx:id="crearCuenta11" buttonType="RAISED" layoutX="16.0" layoutY="315.0" prefHeight="33.0" prefWidth="237.0" ripplerFill="WHITE" stylesheets="@../Styles/EstiloBoton.css" text="Registrarse" textAlignment="CENTER" textFill="WHITE" />
+            <JFXButton id="comprador" fx:id="crearCuenta11" buttonType="RAISED" layoutX="16.0" layoutY="315.0" onAction="#registrarComprador" prefHeight="33.0" prefWidth="237.0" ripplerFill="WHITE" stylesheets="@../Styles/EstiloBoton.css" text="Registrarse" textAlignment="CENTER" textFill="WHITE" />
             <Label layoutX="76.0" layoutY="14.0" text="Cuenta Comprador" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="14.0" />
@@ -99,7 +99,7 @@
       </AnchorPane>
       <AnchorPane id="panel4" fx:id="panel4" layoutX="452.0" layoutY="62.0" prefHeight="385.0" prefWidth="269.0" style="-fx-background-color: rgba(0, 0, 0, 0.3);" visible="false">
          <children>
-            <JFXButton id="comprador" fx:id="crearCuenta111" buttonType="RAISED" layoutX="16.0" layoutY="315.0" prefHeight="33.0" prefWidth="237.0" ripplerFill="WHITE" stylesheets="@../Styles/EstiloBoton.css" text="Registrarse" textAlignment="CENTER" textFill="WHITE" />
+            <JFXButton id="comprador" fx:id="crearCuenta111" buttonType="RAISED" layoutX="16.0" layoutY="315.0" onAction="#abrirPanelCrearCuentaVendedor" prefHeight="33.0" prefWidth="237.0" ripplerFill="WHITE" stylesheets="@../Styles/EstiloBoton.css" text="Registrarse" textAlignment="CENTER" textFill="WHITE" />
             <Label layoutX="76.0" layoutY="14.0" text="Cuenta Vendedor" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="14.0" />

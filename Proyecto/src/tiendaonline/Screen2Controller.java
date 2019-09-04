@@ -443,6 +443,7 @@ public class Screen2Controller implements Initializable {
 
     }
     public static Stage iniciadoSesion;
+    public static Stage stageActual;
     @FXML
     void cerrarSesion(MouseEvent event) {
         vboxCuentaLista.setVisible(false);
@@ -458,6 +459,7 @@ public class Screen2Controller implements Initializable {
             stage.setScene(new Scene(root1));
             stage.show();
             iniciadoSesion.close();
+            stageActual = stage;
         } catch (Exception ex) {
             System.out.println("ERROR FATAL");
         }
@@ -487,7 +489,7 @@ public class Screen2Controller implements Initializable {
         vboxpanel1.setStyle("-fx-background-color:  #eaecee");
         vboxpanel2.setStyle("-fx-background-color:  #17202A");
         departClick.hide();
-        vboxCuentaLista.setVisible(false);
+        
 
     }
     
@@ -519,6 +521,7 @@ public class Screen2Controller implements Initializable {
             stage.setScene(new Scene(root1));
             stage.show();
             InicioSesionController.pagina = stage;
+            stageActual.close();
         } catch (Exception ex) {
 
         }
