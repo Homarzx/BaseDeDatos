@@ -506,7 +506,7 @@ CREATE PROCEDURE BUSCAR_CUENTA(IN correo1 varchar(200),out contraseña1 varchar(
 
 DELIMITER ;
 
-DROP PROCEDURE IF EXISTS obtenerWishList;
+DROP PROCEDURE IF EXISTS obtenerWishlist;
 DELIMITER $
 
 CREATE PROCEDURE obtenerWishlist(in cedulaC VARCHAR(10))
