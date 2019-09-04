@@ -562,7 +562,14 @@ select CAST(FLOOR(RAND()*(999-1)+1) AS char(5)) into idO;
     end $
 delimiter ;
 
-
+drop procedure if exists eliminarCuenta;
+delimiter $
+create procedure eliminarCuenta(cedulaU varchar(10))
+begin 
+DELETE FROM cuenta WHERE usuario = cedulaU;
+   end $
+delimiter ;
+ 
 call buscar_cuenta('rrau@hotmail.com',@contra,@tip,@existe,@usuario);
 select @contra;
 select @tip;
