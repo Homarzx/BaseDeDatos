@@ -541,7 +541,7 @@ select distinct w.idwish into idw from conforma c join producto p on c.idProd=p.
 IF EXISTS(select p.idProducto from producto p ) THEN
 INSERT INTO conforma(idProd,idWish,cantidad) VALUES (idprod,idw,cant);
             END IF;
-END$*/
+END$
 DELIMITER ;
 
 
