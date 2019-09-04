@@ -42,8 +42,6 @@ import javax.swing.JOptionPane;
  * @author barce
  */
 public class InicioSesionController implements Initializable, DraggedScene {
-    
-    
 
     @FXML
     private JFXButton botonIniciarSesion;
@@ -143,7 +141,6 @@ public class InicioSesionController implements Initializable, DraggedScene {
 
     @FXML
     private JFXPasswordField validarContraseña;
-    
 
     public static String tipoUser;
     public static String nomUsuario;
@@ -165,30 +162,36 @@ public class InicioSesionController implements Initializable, DraggedScene {
         }
     }
 
-    
     public static Stage pagina;
-    
+
     @FXML
     void iniciarSesionAcceso(ActionEvent event) {
         Usuario user = new Usuario();
         String[] lista = user.ComprobarCuenta(validarCorreo);
-        
+
         if (lista[2].equals("1")) {
-           
+
             if (lista[0].equals(validarContraseña.getText())) {
-                
+
                 tipoUser = lista[1];
+
                 nomUsuario = user.DevolverNombreUsuario(lista[3]);
                 System.out.println(nomUsuario);
-                try {                  
+                try {
                     FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Screen2.fxml"));
                     Parent root1 = (Parent) fxmlLoader.load();
                     Screen2Controller sc = fxmlLoader.getController();
-                    sc.setNombreUsuario("Hola, "+nomUsuario);
+                    sc.setNombreUsuario("Hola, " + nomUsuario);
+                    sc.getButtonIniciar();
+                    sc.getLabelCuentaLista();
+                    if (tipoUser.equals("V")) {
+                        sc.getLabelVender();
+                    }
                     Stage stage = new Stage();
                     stage.setMaximized(true);
                     stage.setScene(new Scene(root1));
                     stage.show();
+                    Screen2Controller.iniciadoSesion = stage;
                     pagina.close();
                 } catch (Exception ex) {
                     System.out.println("ERROR FATAL");

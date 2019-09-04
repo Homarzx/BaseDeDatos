@@ -37,6 +37,9 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import static tiendaonline.InicioSesionController.nomUsuario;
+import static tiendaonline.InicioSesionController.pagina;
+import static tiendaonline.InicioSesionController.tipoUser;
 
 /**
  * FXML Controller class
@@ -44,22 +47,45 @@ import javafx.stage.StageStyle;
  * @author barce
  */
 public class Screen2Controller implements Initializable {
+
     public static String tipoUsuarioString;
-    
 
-    
-
-    
-    
     private TreeSet<String> treeSet;
-    
-    
+
+    @FXML
+    private JFXButton iniSesionSegura;
+
+    public void getButtonIniciar() {
+        iniSesionSegura.setDisable(true);
+    }
+
+    @FXML
+    private Label cuentayLista;
+
+    public void getLabelCuentaLista() {
+        cuentayLista.setDisable(false);
+    }
+
+    @FXML
+    private Label labelvender;
+
+    public void getLabelVender() {
+        labelvender.setDisable(true);
+    }
 
     @FXML
     private Label nombreUsuario;
-    
+
     public void setNombreUsuario(String nombreUser) {
         nombreUsuario.setText(nombreUser);
+    }
+
+    @FXML
+    private VBox vboxCuentaLista;
+
+    @FXML
+    void abrirsubMenu(MouseEvent event) {
+        vboxCuentaLista.setVisible(true);
     }
 
     @FXML
@@ -231,9 +257,6 @@ public class Screen2Controller implements Initializable {
     private ImageView imgPortada;
 
     @FXML
-    private JFXButton iniSesionSegura;
-
-    @FXML
     private ImageView btnBodyIzq;
 
     @FXML
@@ -280,24 +303,21 @@ public class Screen2Controller implements Initializable {
 
     @FXML
     private JFXButton botonInicio;
-    
+
     @FXML
     private TextField textBuscar;
-     
-    
-     
-    private String txtProducto;
 
+    private String txtProducto;
 
     @FXML
     void BuscarProducto(MouseEvent event) {
-        
-        txtProducto =  textBuscar.getText();
+
+        txtProducto = textBuscar.getText();
         scrollPanel2.setVisible(true);
         scrollPanel1.setVisible(false);
         scrollPanelCarrito.setVisible(false);
     }
-    
+
     @FXML
     void pagPrincipal(MouseEvent event) {
         scrollPanel1.setVisible(true);
@@ -419,6 +439,31 @@ public class Screen2Controller implements Initializable {
     }
 
     @FXML
+    void abrirWishList(MouseEvent event) {
+
+    }
+    public static Stage iniciadoSesion;
+    @FXML
+    void cerrarSesion(MouseEvent event) {
+        vboxCuentaLista.setVisible(false);
+        iniSesionSegura.setDisable(false);
+        
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Screen2.fxml"));
+            Parent root1 = (Parent) fxmlLoader.load();
+            Screen2Controller sc = fxmlLoader.getController();
+            sc.setNombreUsuario("Hola, " + "identificate");
+            Stage stage = new Stage();
+            stage.setMaximized(true);
+            stage.setScene(new Scene(root1));
+            stage.show();
+            iniciadoSesion.close();
+        } catch (Exception ex) {
+            System.out.println("ERROR FATAL");
+        }
+    }
+
+    @FXML
     void irInicioPagina(ActionEvent event) {
         scrollPanel1.setVvalue(0);
         scrollPanel2.setVvalue(0);
@@ -442,7 +487,13 @@ public class Screen2Controller implements Initializable {
         vboxpanel1.setStyle("-fx-background-color:  #eaecee");
         vboxpanel2.setStyle("-fx-background-color:  #17202A");
         departClick.hide();
+        vboxCuentaLista.setVisible(false);
 
+    }
+    
+    @FXML
+    void eliminarSubMenu(MouseEvent event) {
+        vboxCuentaLista.setVisible(false);
     }
 
     public void llenarHbox(String nombreImagen) {
@@ -457,10 +508,9 @@ public class Screen2Controller implements Initializable {
         hboxfila0.getChildren().add(panelAdd);
         hboxfila1.getChildren().add(panelAdd2);
     }
-    
-    
+
     @FXML
-    void iniciarSesionSeguro(ActionEvent event){
+    void iniciarSesionSeguro(ActionEvent event) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("InicioSesion.fxml"));
             Parent root1 = (Parent) fxmlLoader.load();
@@ -473,21 +523,23 @@ public class Screen2Controller implements Initializable {
 
         }
 
-    } /**
+    }
+
+    /**
      * Metodo que llena combobox de la clase categoria
      */
-    private void llenarComboBox(){
+    private void llenarComboBox() {
         ResultSet rs;
         Connection cn = null;
-        try{
-            Conexion con =  new Conexion();
+        try {
+            Conexion con = new Conexion();
             cn = con.conectar();
             String sql = "SELECT * FROM CATEGORIA";
             PreparedStatement pst = cn.prepareCall(sql);
             System.out.println("1");
             rs = pst.executeQuery();
             rs.next();
-            while(rs.isAfterLast()!= true){
+            while (rs.isAfterLast() != true) {
                 String t = rs.getString("nombre");
                 departClick.getItems().add(t);
                 System.out.println();
@@ -495,79 +547,74 @@ public class Screen2Controller implements Initializable {
                 rs.next();
             }
 
-        }
-        catch(SQLException e){
+        } catch (SQLException e) {
             System.err.println(e);
         }
     }
-    
-    public void autoCompletar(){
-    textBuscar.setOnKeyReleased(new EventHandler() {
-        @Override
-        public void handle(Event event) {
-            String to_check=textBuscar.getText();
-            int to_check_len=to_check.length();
-            for(String data:treeSet)
-            {
-                String check_from_data="";
-                for(int i=0;i<to_check_len;i++)
-                {
-                    if(to_check_len<=data.length())
-                    {
-                        check_from_data = check_from_data+data.charAt(i);
+
+    public void autoCompletar() {
+        textBuscar.setOnKeyReleased(new EventHandler() {
+            @Override
+            public void handle(Event event) {
+                String to_check = textBuscar.getText();
+                int to_check_len = to_check.length();
+                for (String data : treeSet) {
+                    String check_from_data = "";
+                    for (int i = 0; i < to_check_len; i++) {
+                        if (to_check_len <= data.length()) {
+                            check_from_data = check_from_data + data.charAt(i);
+                        }
+                    }
+                    if (check_from_data.equals(to_check) && !check_from_data.equals("")) {
+                        textBuscar.setText(data);
+                        //textBuscar.setSelectionStart(to_check_len);
+                        //textBuscar.setSelectionEnd(data.length());
+                        break;
                     }
                 }
-                if(check_from_data.equals(to_check) && !check_from_data.equals(""))
-                {
-                    textBuscar.setText(data);
-                    //textBuscar.setSelectionStart(to_check_len);
-                    //textBuscar.setSelectionEnd(data.length());
-                    break;
-                }
             }
-        }
-    });
+        });
 
     }
-    private void llenarSet(){
-        treeSet= new TreeSet();
+
+    private void llenarSet() {
+        treeSet = new TreeSet();
         ResultSet rs;
         Connection cn = null;
-        try{
-            Conexion con =  new Conexion();
+        try {
+            Conexion con = new Conexion();
             cn = con.conectar();
             String sql = "SELECT * FROM PRODUCTO";
             PreparedStatement pst = cn.prepareCall(sql);
             System.out.println("1");
             rs = pst.executeQuery();
             rs.next();
-            while(rs.isAfterLast()!= true){
+            while (rs.isAfterLast() != true) {
                 String t = rs.getString("nombre");
                 treeSet.add(t);
                 rs.next();
             }
 
-        }
-        catch(SQLException e){
+        } catch (SQLException e) {
             System.err.println(e);
         }
     }
+
     public void BuscarProductoCat() {
 
         scrollPanel2.setVisible(true);
         scrollPanel1.setVisible(false);
         scrollPanelCarrito.setVisible(false);
     }
-    
+
     @FXML
     void seleccionarItem(ActionEvent event) {
-         System.out.println(departClick.getSelectionModel().getSelectedItem());
-         departClick.setStyle("-fx-prompt-text-fill: white");
-         BuscarProductoCat();
-         
+        System.out.println(departClick.getSelectionModel().getSelectedItem());
+        departClick.setStyle("-fx-prompt-text-fill: white");
+        BuscarProductoCat();
+
     }
 
-    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
@@ -580,8 +627,10 @@ public class Screen2Controller implements Initializable {
         llenarComboBox();
         llenarSet();
         autoCompletar();
-        System.out.println("Esto es: "+nombreUsuario.getText());
-        
+        System.out.println("Esto es: " + nombreUsuario.getText());
+        cuentayLista.setDisable(true);
+        labelvender.setDisable(true);
+        vboxCuentaLista.setVisible(false);
     }
 
 }

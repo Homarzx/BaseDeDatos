@@ -1492,7 +1492,7 @@
                                                 <Insets bottom="2.0" left="8.0" right="8.0" top="2.0" />
                                              </padding>
                                           </Label>
-                                          <Label id="encabezadosLb" alignment="CENTER" contentDisplay="CENTER" stylesheets="@../Styles/EstiloBoton.css" text="WishList" textAlignment="CENTER" textFill="#c3bbbb">
+                                          <Label id="encabezadosLb" alignment="CENTER" contentDisplay="CENTER" onMouseClicked="#abrirWishList" stylesheets="@../Styles/EstiloBoton.css" text="WishList" textAlignment="CENTER" textFill="#c3bbbb">
                                              <font>
                                                 <Font name="System Bold" size="12.0" />
                                              </font>
@@ -1506,7 +1506,7 @@
                                                 <Insets bottom="2.0" left="8.0" right="8.0" top="2.0" />
                                              </padding>
                                           </Label>
-                                          <Label id="encabezadosLb" alignment="CENTER" contentDisplay="CENTER" stylesheets="@../Styles/EstiloBoton.css" text="Vender" textAlignment="CENTER" textFill="#c3bbbb">
+                                          <Label id="encabezadosLb" fx:id="labelvender" alignment="CENTER" contentDisplay="CENTER" stylesheets="@../Styles/EstiloBoton.css" text="Vender" textAlignment="CENTER" textFill="#c3bbbb">
                                              <font>
                                                 <Font name="System Bold" size="12.0" />
                                              </font>
@@ -1558,17 +1558,23 @@
                                     </Label>
                                     <HBox prefHeight="100.0" prefWidth="200.0" spacing="20.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
                                        <children>
-                                          <VBox id="verBox" fx:id="btnIdentificate" alignment="CENTER" onMouseClicked="#iniciarSesion" prefHeight="200.0" prefWidth="120.0" stylesheets="@../Styles/EstiloBoton.css">
+                                          <VBox id="verBox" fx:id="btnIdentificate" alignment="CENTER" prefHeight="200.0" prefWidth="120.0" stylesheets="@../Styles/EstiloBoton.css">
                                              <children>
-                                                <Label fx:id="nombreUsuario" text="Hola, identificate" textFill="WHITE" />
-                                                <Label text="Cuenta y Listas" textFill="WHITE">
+                                                <Label fx:id="nombreUsuario" text="Hola, identificate" textFill="WHITE">
+                                                   <cursor>
+                                                      <Cursor fx:constant="TEXT" />
+                                                   </cursor></Label>
+                                                <Label fx:id="cuentayLista" onMouseClicked="#abrirsubMenu" text="Cuenta y Listas" textFill="WHITE">
                                                    <font>
                                                       <Font name="System Bold" size="14.0" />
                                                    </font>
+                                                   <cursor>
+                                                      <Cursor fx:constant="HAND" />
+                                                   </cursor>
                                                 </Label>
                                              </children>
                                              <cursor>
-                                                <Cursor fx:constant="HAND" />
+                                                <Cursor fx:constant="DEFAULT" />
                                              </cursor>
                                              <padding>
                                                 <Insets bottom="7.0" left="5.0" right="5.0" />
@@ -1623,7 +1629,7 @@
                         </AnchorPane>
                         <VBox fx:id="panelBody" alignment="CENTER" prefHeight="200.0" prefWidth="700.0" spacing="15.0" style="-fx-background-color: #EAECEE;">
                            <children>
-                              <AnchorPane id="panelBody" minHeight="-Infinity" minWidth="-Infinity" onMouseEntered="#restaurarOpacidad" prefHeight="880.0" prefWidth="1352.0" style="-fx-background-color: #eaecee;">
+                              <AnchorPane id="panelBody" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#eliminarSubMenu" onMouseEntered="#restaurarOpacidad" prefHeight="880.0" prefWidth="1352.0" style="-fx-background-color: #eaecee;">
                                  <children>
                                     <ImageView fx:id="imgPortada" cache="true" fitHeight="900.0" fitWidth="1440.0" onMouseClicked="#cambiarPortada" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
                                     <HBox alignment="CENTER" layoutX="25.0" layoutY="424.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="420.0" prefWidth="1302.0" spacing="33.0" style="-fx-background-color: transparent;" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0">
@@ -1770,6 +1776,20 @@
                                           <Font name="System Bold" size="24.0" />
                                        </font>
                                     </Label>
+                                    <VBox fx:id="vboxCuentaLista" alignment="TOP_CENTER" layoutX="1027.0" prefHeight="73.0" prefWidth="129.0" spacing="2.0" style="-fx-background-color: transparent;" AnchorPane.topAnchor="0.0">
+                                       <children>
+                                          <JFXButton onMouseClicked="#abrirWishList" prefHeight="25.0" prefWidth="114.0" text="WishList" textAlignment="CENTER" textFill="WHITE">
+                                             <font>
+                                                <Font name="System Bold" size="12.0" />
+                                             </font>
+                                          </JFXButton>
+                                          <JFXButton onMouseClicked="#cerrarSesion" prefHeight="25.0" prefWidth="114.0" text="Cerrar Sesion" textAlignment="CENTER" textFill="WHITE">
+                                             <font>
+                                                <Font name="System Bold" size="12.0" />
+                                             </font>
+                                          </JFXButton>
+                                       </children>
+                                    </VBox>
                                  </children>
                               </AnchorPane>
                               <VBox prefHeight="200.0" prefWidth="100.0" spacing="20.0">
