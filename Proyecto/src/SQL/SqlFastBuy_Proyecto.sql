@@ -182,19 +182,21 @@ CREATE TABLE `tipoProducto` (
 
  ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-INSERT INTO `tipoProducto` VALUES ('001','repuestos de computadora','Computadoras'),
-('002','accesorios para computadora','Computadoras'),
-('003','accesorios para computadoras portatiles','Computadoras'),
-('004','impresoras','Perefericos'),
-('005','escaneres','Perefericos'),
-('006','monitores','Perefericos'),
-('007','servidores','Perefericos'),
-('008','respuestos para tablets','Tablets'),
-('009','accesorios para tablets','Tablets'),
-('010','componentes de almacenamiento','Perefericos'),
-('011','Computadora portatil','Computadoras'),
-('012','Computadora de escritorio','Computadoras'),
-('013','tablets','tablets');
+
+INSERT INTO `tipoProducto` VALUES ('001','001','repuestos de computadora'),
+('002','001','accesorios para computadora'),
+('003','001','accesorios para computadoras portatiles'),
+('004','003','impresoras'),
+('005','003','escaneres'),
+('006','003','monitores'),
+('007','003','servidores'),
+('008','002','respuestos para tablets'),
+('009','002','accesorios para tablets'),
+('010','003','componentes de almacenamiento'),
+('011','001','Computadora portatil'),
+('012','001','Computadora de escritorio'),
+('013','002','tablets');
+
 
 
 /*Table structure for table `producto` */
@@ -384,26 +386,26 @@ CREATE TABLE `conforma` (
   CONSTRAINT `conf_fk_2` FOREIGN KEY (`idProd`) REFERENCES `producto` (`idProducto`)
   ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
   
- INSERT INTO `conforma` VALUES ('001','1667','3'),
-('011','1667','6'),
-('002','3165','5'),
-('012','3165','5'),
-('003','3403','1'),
-('013','3403','2'),
-('004','374','5'),
-('014','374','8'),
-('005','5178','3'),
-('015','5178','4'),
-('006','5183','1'),
-('016','5183','2'),
-('007','586','3'),
-('017','586','2'),
-('001','6325','2'),
-('008','6325','8'),
-('002','7991','4'),
-('009','7991','3'),
-('003','9362','7'),
-('010','9362','1'); 
+ INSERT INTO `conforma` VALUES ('001','1667',3),
+('011','1667',6),
+('002','3165',5),
+('012','3165',5),
+('003','3403',1),
+('013','3403',2),
+('004','374',5),
+('014','374',8),
+('005','5178',3),
+('015','5178',4),
+('006','5183',1),
+('016','5183',2),
+('007','586',3),
+('017','586',2),
+('001','6325',2),
+('008','6325',8),
+('002','7991',4),
+('009','7991',3),
+('003','9362',1),
+('010','9362',1); 
 
 
 
@@ -454,3 +456,32 @@ FOR EACH ROW
 	    END IF;
 END$
 DELIMITER ;
+
+DROP PROCEDURE IF EXISTS AGREGARPROD;
+DELIMITER $
+
+CREATE PROCEDURE AGREGARPROD(IN nombreP VARCHAR(200), IN precioP double, 
+IN cant int,IN tipoprod varchar(50),IN nombreC VARCHAR(50),
+IN cedulaVend CHAR(10))
+	BEGIN
+    DECLARE idP char(10);
+	select CAST(FLOOR(RAND()*(999-1)+1) AS char(5)) into idP;
+		IF NOT EXISTS (SELECT idProducto FROM producto where idProducto=idP)
+        and (select idTipoProducto from tipoproducto natural join producto where nombre=tipoProd)
+        and  (select idCategoria from categoria natural join producto where nombre=nombreC)
+        THEN
+            INSERT INTO PRODUCTO(idProducto,nombre,precio,cantidad,idTipoProducto,idCategoria,idVendedor)
+            VALUES (idP,nombreP,precioP,cant,idTipoProducto,idCategoria,cedulaVend);
+		END IF;
+	END$
+DELIMITER ;
+
+DROP PROCEDURE IF EXISTS ELIMINAR_PROD;
+DELIMITER $
+CREATE PROCEDURE ELIMINAR_PROD(IN idProd CHAR(50))
+	BEGIN
+		DELETE FROM producto WHERE idProducto = idProd;
+	END$
+DELIMITER ;
+
+
