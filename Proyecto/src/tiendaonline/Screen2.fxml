@@ -2,7 +2,6 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXComboBox?>
-<?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Hyperlink?>
@@ -372,7 +371,7 @@
                                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                  </rowConstraints>
                                  <children>
-                                    <TextField fx:id="textBuscar4" onMouseEntered="#restaurarOpacidad" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                                    <TextField fx:id="textBuscar4" onMouseEntered="#restaurarOpacidad" stylesheets="@../Styles/EstiloBoton.css" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                                        <GridPane.margin>
                                           <Insets right="70.0" />
                                        </GridPane.margin>
@@ -593,111 +592,156 @@
                            <children>
                               <AnchorPane prefHeight="200.0" prefWidth="200.0">
                                  <children>
-                                    <Label text="DATOS UBICACIÓN:" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="10.0">
-                                       <font>
-                                          <Font size="18.0" />
-                                       </font>
-                                    </Label>
-                                    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                                    <VBox prefHeight="200.0" prefWidth="100.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="600.0">
                                        <children>
-                                          <VBox alignment="CENTER" minWidth="-Infinity" prefWidth="600.0" spacing="5.0">
+                                          <Label style="-fx-text-fill: black; -fx-font-weight: BOLD; -fx-font-size: 20;" text="DATOS DE UBICACIÓN:">
+                                             <VBox.margin>
+                                                <Insets left="40.0" top="40.0" />
+                                             </VBox.margin>
+                                          </Label>
+                                          <AnchorPane minHeight="-Infinity" prefHeight="30.0" prefWidth="200.0">
                                              <children>
-                                                <HBox prefHeight="45.0" prefWidth="123.0" spacing="20.0">
-                                                   <children>
-                                                      <Label minHeight="-Infinity" minWidth="-Infinity" text="Pais: " textAlignment="CENTER">
-                                                         <font>
-                                                            <Font size="14.0" />
-                                                         </font>
-                                                      </Label>
-                                                      <JFXTextField />
-                                                   </children>
-                                                </HBox>
-                                                <HBox prefHeight="100.0" prefWidth="187.0" spacing="20.0">
-                                                   <children>
-                                                      <Label text="Ciudad: " textAlignment="CENTER">
-                                                         <font>
-                                                            <Font size="14.0" />
-                                                         </font>
-                                                      </Label>
-                                                      <JFXTextField />
-                                                   </children>
-                                                </HBox>
-                                                <HBox prefHeight="100.0" prefWidth="187.0" spacing="20.0">
-                                                   <children>
-                                                      <Label text="Sector: " textAlignment="CENTER">
-                                                         <font>
-                                                            <Font size="14.0" />
-                                                         </font>
-                                                      </Label>
-                                                      <JFXTextField />
-                                                   </children>
-                                                </HBox>
-                                                <HBox prefHeight="100.0" prefWidth="187.0" spacing="20.0">
-                                                   <children>
-                                                      <Label text="Calle: " textAlignment="CENTER">
-                                                         <font>
-                                                            <Font size="14.0" />
-                                                         </font>
-                                                      </Label>
-                                                      <JFXTextField />
-                                                   </children>
-                                                </HBox>
-                                                <HBox prefHeight="100.0" prefWidth="187.0" spacing="20.0">
-                                                   <children>
-                                                      <Label text="Manzana: " textAlignment="CENTER">
-                                                         <font>
-                                                            <Font size="14.0" />
-                                                         </font>
-                                                      </Label>
-                                                      <JFXTextField />
-                                                   </children>
-                                                </HBox>
-                                                <HBox prefHeight="100.0" prefWidth="187.0" spacing="20.0">
-                                                   <children>
-                                                      <Label text="Villa: " textAlignment="CENTER">
-                                                         <font>
-                                                            <Font size="14.0" />
-                                                         </font>
-                                                      </Label>
-                                                      <JFXTextField />
-                                                   </children>
-                                                </HBox>
-                                                <HBox prefHeight="100.0" prefWidth="187.0" spacing="20.0">
-                                                   <children>
-                                                      <Label text="Codigo Postal:" textAlignment="CENTER">
-                                                         <font>
-                                                            <Font size="14.0" />
-                                                         </font>
-                                                      </Label>
-                                                      <JFXTextField />
-                                                   </children>
-                                                </HBox>
+                                                <Label style="-fx-text-fill: black; -fx-font-weight: BOLD; -fx-font-size: 16;" text="PAÍS:" />
+                                                <TextField minHeight="-Infinity" prefHeight="20.0" AnchorPane.leftAnchor="70.0" />
                                              </children>
-                                             <HBox.margin>
-                                                <Insets bottom="50.0" top="50.0" />
-                                             </HBox.margin>
-                                          </VBox>
+                                             <VBox.margin>
+                                                <Insets left="82.0" top="20.0" />
+                                             </VBox.margin>
+                                          </AnchorPane>
+                                          <AnchorPane minHeight="-Infinity" prefHeight="30.0" prefWidth="200.0">
+                                             <children>
+                                                <Label style="-fx-text-fill: black; -fx-font-weight: BOLD; -fx-font-size: 16;" text="CIUDAD:" />
+                                                <TextField minHeight="-Infinity" prefHeight="20.0" AnchorPane.leftAnchor="70.0" />
+                                             </children>
+                                             <VBox.margin>
+                                                <Insets left="82.0" />
+                                             </VBox.margin>
+                                          </AnchorPane>
+                                          <AnchorPane minHeight="-Infinity" prefHeight="30.0" prefWidth="200.0">
+                                             <children>
+                                                <Label style="-fx-text-fill: black; -fx-font-weight: BOLD; -fx-font-size: 16;" text="SECTOR:" />
+                                                <TextField minHeight="-Infinity" prefHeight="20.0" AnchorPane.leftAnchor="70.0" />
+                                             </children>
+                                             <VBox.margin>
+                                                <Insets left="82.0" />
+                                             </VBox.margin>
+                                          </AnchorPane>
+                                          <AnchorPane minHeight="-Infinity" prefHeight="30.0" prefWidth="200.0">
+                                             <children>
+                                                <Label style="-fx-text-fill: black; -fx-font-weight: BOLD; -fx-font-size: 16;" text="CALLE:" />
+                                                <TextField minHeight="-Infinity" prefHeight="20.0" AnchorPane.leftAnchor="70.0" />
+                                             </children>
+                                             <VBox.margin>
+                                                <Insets left="82.0" />
+                                             </VBox.margin>
+                                          </AnchorPane>
+                                          <AnchorPane minHeight="-Infinity" prefHeight="30.0" prefWidth="200.0">
+                                             <children>
+                                                <Label style="-fx-text-fill: black; -fx-font-weight: BOLD; -fx-font-size: 16;" text="MANZANA:" />
+                                                <TextField minHeight="-Infinity" prefHeight="20.0" AnchorPane.leftAnchor="90.0" />
+                                             </children>
+                                             <VBox.margin>
+                                                <Insets left="82.0" />
+                                             </VBox.margin>
+                                          </AnchorPane>
+                                          <AnchorPane minHeight="-Infinity" prefHeight="30.0" prefWidth="200.0">
+                                             <children>
+                                                <Label style="-fx-text-fill: black; -fx-font-weight: BOLD; -fx-font-size: 16;" text="VILLA:" />
+                                                <TextField minHeight="-Infinity" prefHeight="20.0" AnchorPane.leftAnchor="70.0" />
+                                             </children>
+                                             <VBox.margin>
+                                                <Insets left="82.0" />
+                                             </VBox.margin>
+                                          </AnchorPane>
+                                          <AnchorPane minHeight="-Infinity" prefHeight="30.0" prefWidth="200.0">
+                                             <children>
+                                                <Label style="-fx-text-fill: black; -fx-font-weight: BOLD; -fx-font-size: 16;" text="CODIGO POSTAL:" />
+                                                <TextField minHeight="-Infinity" prefHeight="20.0" AnchorPane.leftAnchor="140.0" />
+                                             </children>
+                                             <VBox.margin>
+                                                <Insets left="82.0" />
+                                             </VBox.margin>
+                                          </AnchorPane>
                                        </children>
-                                    </HBox>
+                                    </VBox>
                                  </children>
                               </AnchorPane>
                               <AnchorPane prefHeight="200.0" prefWidth="200.0">
                                  <children>
-                                    <Label text="DATOS TARJETA (DEBITO O CRÉDITO):" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="10.0">
-                                       <font>
-                                          <Font size="18.0" />
-                                       </font>
-                                    </Label>
+                                    <VBox prefHeight="200.0" prefWidth="100.0">
+                                       <children>
+                                          <Label style="-fx-text-fill: black; -fx-font-weight: BOLD; -fx-font-size: 20;" text="DATOS DE UBICACIÓN:">
+                                             <VBox.margin>
+                                                <Insets left="40.0" top="40.0" />
+                                             </VBox.margin>
+                                          </Label>
+                                          <AnchorPane minHeight="-Infinity" prefHeight="30.0" prefWidth="200.0">
+                                             <children>
+                                                <Label style="-fx-text-fill: black; -fx-font-weight: BOLD; -fx-font-size: 16;" text="PAÍS:" />
+                                                <TextField minHeight="-Infinity" prefHeight="20.0" AnchorPane.leftAnchor="70.0" />
+                                             </children>
+                                             <VBox.margin>
+                                                <Insets left="82.0" top="20.0" />
+                                             </VBox.margin>
+                                          </AnchorPane>
+                                          <AnchorPane minHeight="-Infinity" prefHeight="30.0" prefWidth="200.0">
+                                             <children>
+                                                <Label style="-fx-text-fill: black; -fx-font-weight: BOLD; -fx-font-size: 16;" text="CIUDAD:" />
+                                                <TextField minHeight="-Infinity" prefHeight="20.0" AnchorPane.leftAnchor="70.0" />
+                                             </children>
+                                             <VBox.margin>
+                                                <Insets left="82.0" />
+                                             </VBox.margin>
+                                          </AnchorPane>
+                                          <AnchorPane minHeight="-Infinity" prefHeight="30.0" prefWidth="200.0">
+                                             <children>
+                                                <Label style="-fx-text-fill: black; -fx-font-weight: BOLD; -fx-font-size: 16;" text="SECTOR:" />
+                                                <TextField minHeight="-Infinity" prefHeight="20.0" AnchorPane.leftAnchor="70.0" />
+                                             </children>
+                                             <VBox.margin>
+                                                <Insets left="82.0" />
+                                             </VBox.margin>
+                                          </AnchorPane>
+                                          <AnchorPane minHeight="-Infinity" prefHeight="30.0" prefWidth="200.0">
+                                             <children>
+                                                <Label style="-fx-text-fill: black; -fx-font-weight: BOLD; -fx-font-size: 16;" text="CALLE:" />
+                                                <TextField minHeight="-Infinity" prefHeight="20.0" AnchorPane.leftAnchor="70.0" />
+                                             </children>
+                                             <VBox.margin>
+                                                <Insets left="82.0" />
+                                             </VBox.margin>
+                                          </AnchorPane>
+                                          <AnchorPane minHeight="-Infinity" prefHeight="30.0" prefWidth="200.0">
+                                             <children>
+                                                <Label style="-fx-text-fill: black; -fx-font-weight: BOLD; -fx-font-size: 16;" text="MANZANA:" />
+                                                <TextField minHeight="-Infinity" prefHeight="20.0" AnchorPane.leftAnchor="90.0" />
+                                             </children>
+                                             <VBox.margin>
+                                                <Insets left="82.0" />
+                                             </VBox.margin>
+                                          </AnchorPane>
+                                          <AnchorPane minHeight="-Infinity" prefHeight="30.0" prefWidth="200.0">
+                                             <children>
+                                                <Label style="-fx-text-fill: black; -fx-font-weight: BOLD; -fx-font-size: 16;" text="VILLA:" />
+                                                <TextField minHeight="-Infinity" prefHeight="20.0" AnchorPane.leftAnchor="70.0" />
+                                             </children>
+                                             <VBox.margin>
+                                                <Insets left="82.0" />
+                                             </VBox.margin>
+                                          </AnchorPane>
+                                          <AnchorPane minHeight="-Infinity" prefHeight="30.0" prefWidth="200.0">
+                                             <children>
+                                                <Label style="-fx-text-fill: black; -fx-font-weight: BOLD; -fx-font-size: 16;" text="CODIGO POSTAL:" />
+                                                <TextField minHeight="-Infinity" prefHeight="20.0" AnchorPane.leftAnchor="140.0" />
+                                             </children>
+                                             <VBox.margin>
+                                                <Insets left="82.0" />
+                                             </VBox.margin>
+                                          </AnchorPane>
+                                       </children>
+                                    </VBox>
                                  </children>
                               </AnchorPane>
-                              <JFXButton style="-fx-background-color: yellow;" text="Finalizar Compra">
-                                 <font>
-                                    <Font name="System Bold" size="18.0" />
-                                 </font>
-                                 <VBox.margin>
-                                    <Insets bottom="10.0" />
-                                 </VBox.margin>
-                              </JFXButton>
                            </children></VBox>
                         <AnchorPane fx:id="panelBotton111" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="200.0" style="-fx-background-color: #17202A;">
                            <children>
