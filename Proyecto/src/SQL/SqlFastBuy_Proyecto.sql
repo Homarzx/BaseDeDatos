@@ -241,7 +241,7 @@ INSERT INTO `producto` VALUES ('001','memoria ram 4gb',30.00,3,'001','001','0937
 DROP TABLE IF EXISTS `foto`;
 
 CREATE TABLE `foto` (
-  `idFoto` char(5) NOT NULL,
+  `idFoto` int(5) auto_increment,
   `url` varchar(400) NOT NULL,
   `idProducto` char(10) NOT NULL,
   PRIMARY KEY (`idFoto`),
@@ -249,6 +249,23 @@ CREATE TABLE `foto` (
   CONSTRAINT `foto_fk_1` FOREIGN KEY (`idProducto`) REFERENCES `producto` (`idProducto`)
  ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+insert into foto(url,idProducto) values ('\\ImagenesProductos\\001.jpg','001'),
+('\\ImagenesProductos\\002.jpg','002'),
+('\\ImagenesProductos\\003.jpg','003'),
+('\\ImagenesProductos\\004.jpg','004'),
+('\\ImagenesProductos\\005.jpg','005'),
+('\\ImagenesProductos\\006.jpg','006'),
+('\\ImagenesProductos\\007.jpg','007'),
+('\\ImagenesProductos\\008.jpg','008'),
+('\\ImagenesProductos\\009.jpg','009'),
+('\\ImagenesProductos\\010.jpg','010'),
+('\\ImagenesProductos\\011.jpg','011'),
+('\\ImagenesProductos\\012.jpg','012'),
+('\\ImagenesProductos\\013.jpg','013'),
+('\\ImagenesProductos\\014.jpg','014'),
+('\\ImagenesProductos\\015.jpg','015'),
+('\\ImagenesProductos\\016.jpg','016'),
+('\\ImagenesProductos\\017.jpg','017');
 
 /*Table structure for table `orden_pedido` */
 
@@ -569,6 +586,16 @@ begin
 DELETE FROM cuenta WHERE usuario = cedulaU;
    end $
 delimiter ;
+
+DROP PROCEDURE IF EXISTS BUSCAR_FOTO;
+DELIMITER $
+CREATE PROCEDURE BUSCAR_FOTO(IN idProducto1 char(10),out url1 varchar(400))
+	BEGIN
+		IF EXISTS (SELECT url,idProducto from foto where idProducto = idProducto1) THEN
+			SELECT url from foto where idProducto = idProducto1 into url1;
+        END IF;
+    END$
+DELIMITER ;
  
 call buscar_cuenta('rrau@hotmail.com',@contra,@tip,@existe,@usuario);
 select @contra;
