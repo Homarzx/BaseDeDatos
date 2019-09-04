@@ -546,6 +546,22 @@ DELIMITER ;
 
 
 
+drop procedure if exists anadirOrdenD;
+delimiter $
+create procedure anadirOrdenD(in cantp int, in idProd char(5),in idOrden char(5))
+begin
+declare precioT double;
+declare precioP double;
+declare idO char(5);
+select precio from producto where idProducto=idProd into precioP;
+SET precioT=precioP*cantp;
+select CAST(FLOOR(RAND()*(999-1)+1) AS char(5)) into idO;
+		IF NOT EXISTS (select idOrdenD from orden_detalle where idOrdenD=idO)
+        then insert into orden_detalle values(idO,cantp,precioP,precioT,idOrden,idProd);
+	end if;
+    end $
+delimiter ;
+
 
 call buscar_cuenta('rrau@hotmail.com',@contra,@tip,@existe,@usuario);
 select @contra;
