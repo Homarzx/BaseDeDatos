@@ -165,8 +165,9 @@ public class InicioSesionController implements Initializable, DraggedScene {
         }
     }
 
-    Screen2Controller sc;
-
+    
+    public static Stage pagina;
+    
     @FXML
     void iniciarSesionAcceso(ActionEvent event) {
         Usuario user = new Usuario();
@@ -179,15 +180,16 @@ public class InicioSesionController implements Initializable, DraggedScene {
                 tipoUser = lista[1];
                 nomUsuario = user.DevolverNombreUsuario(lista[3]);
                 System.out.println(nomUsuario);
-                try {
-                    sc = new Screen2Controller();
-                    sc.setNombreUsuario(nomUsuario);
+                try {                  
                     FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Screen2.fxml"));
                     Parent root1 = (Parent) fxmlLoader.load();
+                    Screen2Controller sc = fxmlLoader.getController();
+                    sc.setNombreUsuario("Hola, "+nomUsuario);
                     Stage stage = new Stage();
                     stage.setMaximized(true);
                     stage.setScene(new Scene(root1));
                     stage.show();
+                    pagina.close();
                 } catch (Exception ex) {
                     System.out.println("ERROR FATAL");
                 }

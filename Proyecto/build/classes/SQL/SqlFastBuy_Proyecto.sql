@@ -503,7 +503,21 @@ CREATE PROCEDURE BUSCAR_CUENTA(IN correo1 varchar(200),out contraseña1 varchar(
             set usuario1 = '0';
         END IF;
     END$
+
 DELIMITER ;
+
+DROP PROCEDURE IF EXISTS obtenerWishlist;
+DELIMITER $
+
+CREATE PROCEDURE obtenerWishlist(in cedulaC VARCHAR(10))
+begin 
+select p.idProducto, p.nombre, c.cantidad from conforma c join producto p on c.idProd=p.idProducto 
+			join wishlist w on c.idWish=w.idwish where w.idComprador=cedulaC;/*7991*/
+end$
+DELIMITER ;
+
+call obtenerWishList('0918880938');
+
 
 DROP PROCEDURE IF EXISTS BUSCAR_USUARIO_DEVUELVE_NOMBRE;
 DELIMITER $
@@ -514,6 +528,24 @@ CREATE PROCEDURE BUSCAR_USUARIO_DEVUELVE_NOMBRE(IN cedula1 varchar(10), out nomb
         END IF;
     END$
 DELIMITER ;
+
+
+
+drop procedure añadirProductoWishlist;
+delimiter $
+CREATE PROCEDURE añadirProductoWishlist(in cedulaC VARCHAR(10), in idProd char(5), in cant int) 
+begin
+declare idw char(5);
+select distinct w.idwish into idw from conforma c join producto p on c.idProd=p.idProducto 
+			join wishlist w on c.idWish=w.idwish where w.idComprador=cedulaC;            
+IF EXISTS(select p.idProducto from producto p ) THEN
+INSERT INTO conforma(idProd,idWish,cantidad) VALUES (idprod,idw,cant);
+            END IF;
+END$
+DELIMITER ;
+
+
+
 
 call buscar_cuenta('rrau@hotmail.com',@contra,@tip,@existe,@usuario);
 select @contra;

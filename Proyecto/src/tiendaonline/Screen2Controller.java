@@ -45,24 +45,24 @@ import javafx.stage.StageStyle;
  */
 public class Screen2Controller implements Initializable {
     public static String tipoUsuarioString;
-    public String nombreUsuario;
+    
 
-    public void setNombreUsuario(String nombreUsuario) {
-        this.nombreUsuario = nombreUsuario;
-    }
+    
 
+    
     
     private TreeSet<String> treeSet;
     
     
 
-    //@FXML
-    //private ScrollPane dezplazamiento;
+    @FXML
+    private Label nombreUsuario;
+    
+    public void setNombreUsuario(String nombreUser) {
+        nombreUsuario.setText(nombreUser);
+    }
 
-    //@FXML
-    //private AnchorPane panelDezplaMain;
-
-      @FXML
+    @FXML
     private StackPane stackPanel;
 
     @FXML
@@ -457,7 +457,8 @@ public class Screen2Controller implements Initializable {
         hboxfila0.getChildren().add(panelAdd);
         hboxfila1.getChildren().add(panelAdd2);
     }
-
+    
+    
     @FXML
     void iniciarSesionSeguro(ActionEvent event){
         try {
@@ -467,6 +468,7 @@ public class Screen2Controller implements Initializable {
             stage.initStyle(StageStyle.UNDECORATED);
             stage.setScene(new Scene(root1));
             stage.show();
+            InicioSesionController.pagina = stage;
         } catch (Exception ex) {
 
         }
@@ -578,7 +580,8 @@ public class Screen2Controller implements Initializable {
         llenarComboBox();
         llenarSet();
         autoCompletar();
-        System.out.println(nombreUsuario);
+        System.out.println("Esto es: "+nombreUsuario.getText());
+        
     }
 
 }

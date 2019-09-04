@@ -1560,7 +1560,7 @@
                                        <children>
                                           <VBox id="verBox" fx:id="btnIdentificate" alignment="CENTER" onMouseClicked="#iniciarSesion" prefHeight="200.0" prefWidth="120.0" stylesheets="@../Styles/EstiloBoton.css">
                                              <children>
-                                                <Label text="Hola, identificate" textFill="WHITE" />
+                                                <Label fx:id="nombreUsuario" text="Hola, identificate" textFill="WHITE" />
                                                 <Label text="Cuenta y Listas" textFill="WHITE">
                                                    <font>
                                                       <Font name="System Bold" size="14.0" />
