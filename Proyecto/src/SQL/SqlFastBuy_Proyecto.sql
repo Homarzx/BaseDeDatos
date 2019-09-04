@@ -274,7 +274,7 @@ DROP TABLE IF EXISTS `orden_pedido`;
 CREATE TABLE `orden_pedido` (
   `idOrden` char(10) NOT NULL,
   `nombreReceptor` varchar(50) default NULL,
-  `total_pedido` double NOT NULL,
+  `total_pedido` default NULL,
   `notas` varchar(15) default NULL,
   `estado` char(1) default NULL,
   `numTarjeta` char(16) NOT NULL,
