@@ -484,4 +484,38 @@ CREATE PROCEDURE ELIMINAR_PROD(IN idProd CHAR(50))
 	END$
 DELIMITER ;
 
+DROP PROCEDURE IF EXISTS BUSCAR_CUENTA;
+DELIMITER $
+CREATE PROCEDURE BUSCAR_CUENTA(IN correo1 varchar(200),out contraseña1 varchar(12) , out tipo1 char(1),out existe char(1),out usuario1 varchar(10))
+	BEGIN
+		IF EXISTS (SELECT tipo,usuario,correo,contraseña from cuenta where correo = correo1) THEN
+			SELECT contraseña from cuenta where correo = correo1 into contraseña1;
+            SELECT tipo from cuenta where correo = correo1 into tipo1;
+            set existe = '1';
+            SELECT usuario from cuenta where correo = correo1 into usuario1;
+		ELSE
+			set tipo1 = '0';
+			set existe = '0';
+            set contraseña1 = '0';
+            set usuario1 = '0';
+        END IF;
+    END$
+DELIMITER ;
+
+DROP PROCEDURE IF EXISTS BUSCAR_USUARIO_DEVUELVE_NOMBRE;
+DELIMITER $
+CREATE PROCEDURE BUSCAR_USUARIO_DEVUELVE_NOMBRE(IN cedula1 varchar(10), out nombres1 varchar(20))
+	BEGIN
+		IF exists (SELECT nombres,apellidos,cedula from usuario where cedula = cedula1) THEN
+            SELECT nombres from usuario where cedula = cedula1 into nombres1;
+        END IF;
+    END$
+DELIMITER ;
+
+call buscar_cuenta('rrau@hotmail.com',@contra,@tip,@existe,@usuario);
+select @contra;
+select @tip;
+select @existe;
+select @usuario;
+
 
