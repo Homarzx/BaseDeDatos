@@ -503,7 +503,21 @@ CREATE PROCEDURE BUSCAR_CUENTA(IN correo1 varchar(200),out contraseña1 varchar(
             set usuario1 = '0';
         END IF;
     END$
+
 DELIMITER ;
+
+DROP PROCEDURE IF EXISTS obtenerWishList;
+DELIMITER $
+
+CREATE PROCEDURE obtenerWishlist(in cedulaC VARCHAR(10))
+begin 
+select p.idProducto, p.nombre, c.cantidad from conforma c join producto p on c.idProd=p.idProducto 
+			join wishlist w on c.idWish=w.idwish where w.idComprador=cedulaC;/*7991*/
+end$
+DELIMITER ;
+
+call obtenerWishList('0918880938');
+
 
 DROP PROCEDURE IF EXISTS BUSCAR_USUARIO_DEVUELVE_NOMBRE;
 DELIMITER $
