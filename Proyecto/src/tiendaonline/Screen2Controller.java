@@ -14,6 +14,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.Set;
 import java.util.TreeSet;
@@ -312,6 +313,11 @@ public class Screen2Controller implements Initializable {
     @FXML
     void BuscarProducto(MouseEvent event) {
         //vboxProductos
+        //\\ImagenesProductos\\001.jpg
+        HBox contenerInfo = new HBox();
+        contenerInfo.setSpacing(20.0);
+        ImageView imagen = new ImageView();
+        imagen.setImage(new Image("\\ImagenesProductos\\\\001.jpg"));
         txtProducto = textBuscar.getText();
         scrollPanel2.setVisible(true);
         scrollPanel1.setVisible(false);
@@ -364,7 +370,7 @@ public class Screen2Controller implements Initializable {
 
     }
     
-    //\\ImagenesProductos\\001.jpg
+    
 
     double hboxcont0 = 0;
 
@@ -581,7 +587,7 @@ public class Screen2Controller implements Initializable {
         });
 
     }
-
+    ArrayList<String[]> listaIdProductos = new ArrayList<String[]>();
     private void llenarSet() {
         treeSet = new TreeSet();
         ResultSet rs;
@@ -595,7 +601,11 @@ public class Screen2Controller implements Initializable {
             rs = pst.executeQuery();
             rs.next();
             while (rs.isAfterLast() != true) {
+                String[] listaTemporal = new String[2];
                 String t = rs.getString("nombre");
+                listaTemporal[0] = t;
+                listaTemporal[1] = rs.getString("idProducto");
+                listaIdProductos.add(listaTemporal);
                 treeSet.add(t);
                 rs.next();
             }
