@@ -615,6 +615,52 @@ select CAST(FLOOR(RAND()*(999-1)+1) AS char(5)) into idO;
     end $
 delimiter ;
 
+
+DROP PROCEDURE IF EXISTS agregarUbicacion;
+delimiter $   
+CREATE PROCEDURE agregarUbicacion(in pais varchar(50),in ciudad varchar(20), in sector varchar(15),
+					in calle varchar(15), in manzana varchar(4),in villa varchar(4),in codigo_postal varchar(6),                   
+                    in cedula varchar(10))
+begin
+declare idU char(5);
+select CAST(FLOOR(RAND()*(999-1)+1) AS char(5)) into idU;
+    IF NOT EXISTS(select u.id_ubicacion from ubicacion u where u.id_ubicacion=idU) THEN
+INSERT INTO ubicacion  VALUES (idU, pais, ciudad, sector, calle, manzana, villa, codigo_postal,cedula);
+            END IF;
+                
+END$
+DELIMITER ;
+
+
+DROP PROCEDURE IF EXISTS agregarTarjeta;
+delimiter $   
+CREATE PROCEDURE agregarTarjeta(in numTarjeta varchar(16),in fechaexp varchar(5), in cvs varchar(3),
+					in banco varchar(20), in tipoPago char(1), in cedula varchar(10))
+begin
+    IF NOT EXISTS(select t.numTarjeta from tarjeta t where t.numTarjeta=numTarjeta) THEN
+INSERT INTO tarjeta  VALUES (numTarjeta, fechaexp, cvs, banco, tipoPago,cedula);
+            END IF;
+                
+END$
+DELIMITER ;
+
+DELIMITER $
+CREATE PROCEDURE ELIMINAR_TARJETA(IN  numT CHAR(50))
+	BEGIN
+		DELETE FROM tarjeta WHERE numTarjeta = numT;
+	END$
+DELIMITER ;
+
+DELIMITER $
+CREATE PROCEDURE ELIMINAR_UBI(IN  idU CHAR(50))
+	BEGIN
+		DELETE FROM ubicacion WHERE id_ubicacion = idU;
+	END$
+DELIMITER ;
+
+
+
+
 call buscar_cuenta('rrau@hotmail.com',@contra,@tip,@existe,@usuario);
 select @contra;
 select @tip;
