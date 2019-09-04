@@ -56,13 +56,13 @@ CREATE TABLE `cuenta` (
   `tipo` char(1) NOT NULL,
   `usuario` varchar(10) NOT NULL,
   `correo` varchar(200) NOT NULL,
-  `contraseña` varchar(12) NOT NULL,
+  `contraseÃ±a` varchar(12) NOT NULL,
   PRIMARY KEY (`idCuenta`),
   KEY `usuario` (`usuario`),
   CONSTRAINT `cuenta_fk_1` FOREIGN KEY (`usuario`) REFERENCES `usuario` (`cedula`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-INSERT INTO cuenta(tipo,usuario,correo,contraseña) VALUES ('V','0924372095','rrau@hotmail.com','as35d435'),
+INSERT INTO cuenta(tipo,usuario,correo,contraseÃ±a) VALUES ('V','0924372095','rrau@hotmail.com','as35d435'),
 ('V','0926554035','harris.sage@yahoo.com','sdf3cv5454'),
 ('V','0938248440','stoy@gmail.com','asd43as5'),
 ('V','0921077992','areilly@gmail.com','a5c2w4a3'),
@@ -420,22 +420,22 @@ CREATE TABLE `conforma` (
  
 DROP PROCEDURE IF EXISTS REGISTRAR_USUARIO_COMPRADOR;
 DELIMITER $
-CREATE PROCEDURE REGISTRAR_USUARIO_COMPRADOR(IN cedula1 VARCHAR(10), IN nombres1 VARCHAR(40), IN apellidos1 VARCHAR(40),IN tipoUsuario1 CHAR(1), IN edad1 VARCHAR(3), IN telefono1 VARCHAR(10),IN correo1 VARCHAR(200), IN contraseña1 VARCHAR(12))
+CREATE PROCEDURE REGISTRAR_USUARIO_COMPRADOR(IN cedula1 VARCHAR(10), IN nombres1 VARCHAR(40), IN apellidos1 VARCHAR(40),IN tipoUsuario1 CHAR(1), IN edad1 VARCHAR(3), IN telefono1 VARCHAR(10),IN correo1 VARCHAR(200), IN contraseÃ±a1 VARCHAR(12))
 	BEGIN
 		IF NOT EXISTS (select usuario,tipo from cuenta where usuario = cedula1 and tipo = tipoUsuario1) THEN
 			INSERT INTO usuario(cedula,nombres,apellidos,edad,telefono) VALUES (cedula1,nombres1,apellidos1,edad1,telefono1);
-            INSERT INTO cuenta(tipo,usuario,correo,contraseña) VALUES (tipoUsuario1,cedula1,correo1,contraseña1);
+            INSERT INTO cuenta(tipo,usuario,correo,contraseÃ±a) VALUES (tipoUsuario1,cedula1,correo1,contraseÃ±a1);
 		END IF;
 	END$
 DELIMITER ;
 
 DROP PROCEDURE IF EXISTS REGISTRAR_USUARIO_VENDEDOR;
 DELIMITER $
-CREATE PROCEDURE REGISTRAR_USUARIO_VENDEDOR(IN cedula1 VARCHAR(10), IN nombres1 VARCHAR(40), IN apellidos1 VARCHAR(40),IN tipoUsuario1 CHAR(1),IN nombreTienda1 VARCHAR(20),IN telefono1 VARCHAR(10),IN ruc1 VARCHAR(11),IN correo1 VARCHAR(200), IN contraseña1 VARCHAR(12))
+CREATE PROCEDURE REGISTRAR_USUARIO_VENDEDOR(IN cedula1 VARCHAR(10), IN nombres1 VARCHAR(40), IN apellidos1 VARCHAR(40),IN tipoUsuario1 CHAR(1),IN nombreTienda1 VARCHAR(20),IN telefono1 VARCHAR(10),IN ruc1 VARCHAR(11),IN correo1 VARCHAR(200), IN contraseÃ±a1 VARCHAR(12))
 	BEGIN
 		IF NOT EXISTS (select usuario,tipo from cuenta where usuario = cedula1 and tipo = tipoUsuario1) THEN
 			INSERT INTO usuario(cedula,nombres,apellidos,nombreTienda,telefono,ruc) VALUES (cedula1,nombres1,apellidos1,edad1,telefono1);
-            INSERT INTO cuenta(tipo,usuario,correo,contraseña) VALUES (tipoUsuario1,cedula1,correo1,contraseña1);
+            INSERT INTO cuenta(tipo,usuario,correo,contraseÃ±a) VALUES (tipoUsuario1,cedula1,correo1,contraseÃ±a1);
 		END IF;
 	END$
 DELIMITER ;
@@ -457,24 +457,27 @@ FOR EACH ROW
 END$
 DELIMITER ;
 
-DROP PROCEDURE IF EXISTS AGREGARPROD;
-DELIMITER $
 
-CREATE PROCEDURE AGREGARPROD(IN nombreP VARCHAR(200), IN precioP double, 
-IN cant int,IN tipoprod varchar(50),IN nombreC VARCHAR(50),
+DROP PROCEDURE IF EXISTS AGREGARPRODUCTO;
+
+DELIMITER $
+CREATE PROCEDURE AGREGARPRODUCTO(IN nombreP VARCHAR(200), IN precioP double, 
+IN cant int,IN tipoprod varchar(100),IN nombreC varCHAR(100),
 IN cedulaVend CHAR(10))
 	BEGIN
     DECLARE idP char(10);
+    DECLARE tipoP varchar(100);
+    DECLARE catP varchar(100);
 	select CAST(FLOOR(RAND()*(999-1)+1) AS char(5)) into idP;
-		IF NOT EXISTS (SELECT idProducto FROM producto where idProducto=idP)
-        and (select idTipoProducto from tipoproducto natural join producto where nombre=tipoProd)
-        and  (select idCategoria from categoria natural join producto where nombre=nombreC)
-        THEN
-            INSERT INTO PRODUCTO(idProducto,nombre,precio,cantidad,idTipoProducto,idCategoria,idVendedor)
-            VALUES (idP,nombreP,precioP,cant,idTipoProducto,idCategoria,cedulaVend);
-		END IF;
-	END$
+    select tp.idTipoProducto INTO tipoP from tipoproducto tp where tp.nombre=tipoprod;
+    select idCategoria INTO catP from categoria where nombre=nombreC;
+		IF EXISTS (select u.cedula from usuario u join producto p on u.cedula=p.idVendedor where u.cedula=cedulaVend)
+        THEN        
+            INSERT INTO producto VALUES (idP,nombreP,precioP,cant,tipoP,catP,cedulaVend);
+		        END IF;
+        	END$
 DELIMITER ;
+
 
 DROP PROCEDURE IF EXISTS ELIMINAR_PROD;
 DELIMITER $
@@ -486,17 +489,17 @@ DELIMITER ;
 
 DROP PROCEDURE IF EXISTS BUSCAR_CUENTA;
 DELIMITER $
-CREATE PROCEDURE BUSCAR_CUENTA(IN correo1 varchar(200),out contrase�a1 varchar(12) , out tipo1 char(1),out existe char(1),out usuario1 varchar(10))
+CREATE PROCEDURE BUSCAR_CUENTA(IN correo1 varchar(200),out contraseña1 varchar(12) , out tipo1 char(1),out existe char(1),out usuario1 varchar(10))
 	BEGIN
-		IF EXISTS (SELECT tipo,usuario,correo,contrase�a from cuenta where correo = correo1) THEN
-			SELECT contrase�a from cuenta where correo = correo1 into contrase�a1;
+		IF EXISTS (SELECT tipo,usuario,correo,contraseña from cuenta where correo = correo1) THEN
+			SELECT contraseña from cuenta where correo = correo1 into contraseña1;
             SELECT tipo from cuenta where correo = correo1 into tipo1;
             set existe = '1';
             SELECT usuario from cuenta where correo = correo1 into usuario1;
 		ELSE
 			set tipo1 = '0';
 			set existe = '0';
-            set contrase�a1 = '0';
+            set contraseña1 = '0';
             set usuario1 = '0';
         END IF;
     END$
