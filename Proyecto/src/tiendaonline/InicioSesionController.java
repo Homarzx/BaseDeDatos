@@ -171,16 +171,17 @@ public class InicioSesionController implements Initializable, DraggedScene {
     void iniciarSesionAcceso(ActionEvent event) {
         Usuario user = new Usuario();
         String[] lista = user.ComprobarCuenta(validarCorreo);
-        System.out.println(lista[0]+" "+lista[2]);
+        
         if (lista[2].equals("1")) {
-            System.out.println("ENTRO IF");
+           
             if (lista[0].equals(validarContraseña.getText())) {
-                System.out.println("PASO SEGUNDO IF");
+                
                 tipoUser = lista[1];
                 nomUsuario = user.DevolverNombreUsuario(lista[3]);
+                System.out.println(nomUsuario);
                 try {
                     sc = new Screen2Controller();
-
+                    sc.setNombreUsuario(nomUsuario);
                     FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Screen2.fxml"));
                     Parent root1 = (Parent) fxmlLoader.load();
                     Stage stage = new Stage();

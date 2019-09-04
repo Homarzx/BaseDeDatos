@@ -46,6 +46,11 @@ import javafx.stage.StageStyle;
 public class Screen2Controller implements Initializable {
     public static String tipoUsuarioString;
     public String nombreUsuario;
+
+    public void setNombreUsuario(String nombreUsuario) {
+        this.nombreUsuario = nombreUsuario;
+    }
+
     
     private TreeSet<String> treeSet;
     
@@ -573,7 +578,7 @@ public class Screen2Controller implements Initializable {
         llenarComboBox();
         llenarSet();
         autoCompletar();
-
+        System.out.println(nombreUsuario);
     }
 
 }
