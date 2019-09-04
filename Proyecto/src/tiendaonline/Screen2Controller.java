@@ -48,6 +48,8 @@ public class Screen2Controller implements Initializable {
     public String nombreUsuario;
     
     private TreeSet<String> treeSet;
+    
+    
 
     //@FXML
     //private ScrollPane dezplazamiento;

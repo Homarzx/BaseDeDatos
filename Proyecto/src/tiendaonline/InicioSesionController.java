@@ -42,6 +42,8 @@ import javax.swing.JOptionPane;
  * @author barce
  */
 public class InicioSesionController implements Initializable, DraggedScene {
+    
+    
 
     @FXML
     private JFXButton botonIniciarSesion;
@@ -140,7 +142,8 @@ public class InicioSesionController implements Initializable, DraggedScene {
     private JFXTextField validarCorreo;
 
     @FXML
-    private JFXTextField validarContraseña;
+    private JFXPasswordField validarContraseña;
+    
 
     public static String tipoUser;
     public static String nomUsuario;
