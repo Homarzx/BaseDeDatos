@@ -83,11 +83,11 @@ public class Usuario {
     }
 
     public String[] ComprobarCuenta(JFXTextField correo) {
-        String[] lista = new String[3];
+        String[] lista = new String[4];
         try {
             Conexion con = new Conexion();
             cn = con.conectar();
-
+            System.out.println("COMIENZO CALL");
             String sql = "CALL BUSCAR_CUENTA(?,?,?,?,?)";
             //System.out.println(correo.getText());
             CallableStatement pst = cn.prepareCall(sql);
@@ -100,7 +100,9 @@ public class Usuario {
             //System.out.println(contraseña.toString());
             pst.execute();
             for (int i = 1; i < 5; i++) {
+                
                 lista[i-1] = pst.getString(i+1);
+                System.out.println("ESTO ES "+lista[i-1]);
             }
             
             pst.executeUpdate();
@@ -108,12 +110,14 @@ public class Usuario {
             pst.close();
             cn.close();
             
-            System.out.println(lista);
+            System.out.println(lista[0]);
+            System.out.println("HOLAAAAAAAAAAAAAAAAA");
             
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
-            JOptionPane.showMessageDialog(null, "VERIFICAR INFORMACION");
+            JOptionPane.showMessageDialog(null, "VERIFICAR INFORMACION NORMAL");
         }
+        System.out.println("FUERA DE TRY: "+lista);
         return lista;
     }
 
