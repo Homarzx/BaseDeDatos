@@ -597,6 +597,24 @@ CREATE PROCEDURE BUSCAR_FOTO(IN idProducto1 char(10),out url1 varchar(400))
     END$
 DELIMITER ;
  
+
+ /*procedure que se utilizara al dar clic en comprar*/
+drop procedure if exists crearOrdenP;
+delimiter $
+create procedure crearOrdenP(in numT char(16), in ced varchar(10), in ubi char(5))
+begin
+declare idO char(5);
+select CAST(FLOOR(RAND()*(999-1)+1) AS char(5)) into idO;
+		IF NOT EXISTS (select idOrden from orden_pedido where idOrden=idO) 
+        and exists(select numTarjeta from tarjeta where tarjeta.cedula=ced and numTarjeta=numT)
+        then insert into orden_pedido(idOrden,nombreReceptor,total_pedido,notas,estado,
+										numTarjeta,cedula,fechaEntrega,fechaEnvio,id_ubicacion ) 
+        values(idO,NULL,NULL,NULL,NULL,numT,ced,NULL,NULL,ubi) ;
+	end if;
+	
+    end $
+delimiter ;
+
 call buscar_cuenta('rrau@hotmail.com',@contra,@tip,@existe,@usuario);
 select @contra;
 select @tip;
