@@ -124,5 +124,6 @@
             <JFXTextField fx:id="v_ruc" focusColor="WHITE" layoutX="48.0" layoutY="160.0" prefHeight="25.0" prefWidth="202.0" style="-fx-text-fill: #40affc;" unFocusColor="#575757" />
          </children>
       </AnchorPane>
+      <Label fx:id="precioCompra" />
    </children>
 </AnchorPane>

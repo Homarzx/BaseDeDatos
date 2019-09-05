@@ -56,13 +56,13 @@ CREATE TABLE `cuenta` (
   `tipo` char(1) NOT NULL,
   `usuario` varchar(10) NOT NULL,
   `correo` varchar(200) NOT NULL,
-  `contraseÃ±a` varchar(12) NOT NULL,
+  `contraseña` varchar(12) NOT NULL,
   PRIMARY KEY (`idCuenta`),
   KEY `usuario` (`usuario`),
   CONSTRAINT `cuenta_fk_1` FOREIGN KEY (`usuario`) REFERENCES `usuario` (`cedula`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-INSERT INTO cuenta(tipo,usuario,correo,contraseÃ±a) VALUES ('V','0924372095','rrau@hotmail.com','as35d435'),
+INSERT INTO cuenta(tipo,usuario,correo,contraseña) VALUES ('V','0924372095','rrau@hotmail.com','as35d435'),
 ('V','0926554035','harris.sage@yahoo.com','sdf3cv5454'),
 ('V','0938248440','stoy@gmail.com','asd43as5'),
 ('V','0921077992','areilly@gmail.com','a5c2w4a3'),
@@ -437,22 +437,22 @@ CREATE TABLE `conforma` (
  
 DROP PROCEDURE IF EXISTS REGISTRAR_USUARIO_COMPRADOR;
 DELIMITER $
-CREATE PROCEDURE REGISTRAR_USUARIO_COMPRADOR(IN cedula1 VARCHAR(10), IN nombres1 VARCHAR(40), IN apellidos1 VARCHAR(40),IN tipoUsuario1 CHAR(1), IN edad1 VARCHAR(3), IN telefono1 VARCHAR(10),IN correo1 VARCHAR(200), IN contraseÃ±a1 VARCHAR(12))
+CREATE PROCEDURE REGISTRAR_USUARIO_COMPRADOR(IN cedula1 VARCHAR(10), IN nombres1 VARCHAR(40), IN apellidos1 VARCHAR(40),IN tipoUsuario1 CHAR(1), IN edad1 VARCHAR(3), IN telefono1 VARCHAR(10),IN correo1 VARCHAR(200), IN contraseña1 VARCHAR(12))
 	BEGIN
 		IF NOT EXISTS (select usuario,tipo from cuenta where usuario = cedula1 and tipo = tipoUsuario1) THEN
 			INSERT INTO usuario(cedula,nombres,apellidos,edad,telefono) VALUES (cedula1,nombres1,apellidos1,edad1,telefono1);
-            INSERT INTO cuenta(tipo,usuario,correo,contraseÃ±a) VALUES (tipoUsuario1,cedula1,correo1,contraseÃ±a1);
+            INSERT INTO cuenta(tipo,usuario,correo,contraseña) VALUES (tipoUsuario1,cedula1,correo1,contraseña1);
 		END IF;
 	END$
 DELIMITER ;
 
 DROP PROCEDURE IF EXISTS REGISTRAR_USUARIO_VENDEDOR;
 DELIMITER $
-CREATE PROCEDURE REGISTRAR_USUARIO_VENDEDOR(IN cedula1 VARCHAR(10), IN nombres1 VARCHAR(40), IN apellidos1 VARCHAR(40),IN tipoUsuario1 CHAR(1),IN nombreTienda1 VARCHAR(20),IN telefono1 VARCHAR(10),IN ruc1 VARCHAR(11),IN correo1 VARCHAR(200), IN contraseÃ±a1 VARCHAR(12))
+CREATE PROCEDURE REGISTRAR_USUARIO_VENDEDOR(IN cedula1 VARCHAR(10), IN nombres1 VARCHAR(40), IN apellidos1 VARCHAR(40),IN tipoUsuario1 CHAR(1),IN nombreTienda1 VARCHAR(20),IN telefono1 VARCHAR(10),IN ruc1 VARCHAR(11),IN correo1 VARCHAR(200), IN contraseña1 VARCHAR(12))
 	BEGIN
 		IF NOT EXISTS (select usuario,tipo from cuenta where usuario = cedula1 and tipo = tipoUsuario1) THEN
 			INSERT INTO usuario(cedula,nombres,apellidos,nombreTienda,telefono,ruc) VALUES (cedula1,nombres1,apellidos1,edad1,telefono1);
-            INSERT INTO cuenta(tipo,usuario,correo,contraseÃ±a) VALUES (tipoUsuario1,cedula1,correo1,contraseÃ±a1);
+            INSERT INTO cuenta(tipo,usuario,correo,contraseña) VALUES (tipoUsuario1,cedula1,correo1,contraseña1);
 		END IF;
 	END$
 DELIMITER ;
@@ -661,6 +661,35 @@ CREATE PROCEDURE ELIMINAR_UBI(IN  idU CHAR(50))
 	END$
 DELIMITER ;
 
+DROP PROCEDURE IF EXISTS BUSCAR_UBICACION;
+DELIMITER $
+CREATE PROCEDURE BUSCAR_UBICACION(IN cedula1 varchar(10),out id_ubicacion1 varchar(10) , out pais1 varchar(20),out cuidad1 varchar(20),out sector1 varchar(15),out calle1 varchar(15),out manzana1 varchar(4),out villa1 varchar(4),out codigo_postal1 varchar(6))
+	BEGIN
+		IF EXISTS (SELECT pais,cuidad,sector,calle,manzana,villa,codigo_postal,cedula from ubicacion where cedula = cedula1) THEN
+			SELECT id_ubicacion from ubicacion where cedula = cedula1 into id_ubicacion1;
+            SELECT pais from ubicacion where cedula = cedula1 into pais1;
+            SELECT cuidad from ubicacion where cedula = cedula1 into cuidad1;
+            SELECT sector from ubicacion where cedula = cedula1 into sector1;
+            SELECT calle from ubicacion where cedula = cedula1 into calle1;
+            SELECT manzana from ubicacion where cedula = cedula1 into manzana1;
+            SELECT villa from ubicacion where cedula = cedula1 into villa1;
+            SELECT codigo_postal from ubicacion where cedula = cedula1 into codigo_postal1;
+		END IF;
+    END$
+DELIMITER ;
+
+DROP PROCEDURE IF EXISTS BUSCAR_TARJETA;
+DELIMITER $
+CREATE PROCEDURE BUSCAR_TARJETA(IN cedula1 varchar(10),out numTarjeta1 char(16) , out fechaExp1 varchar(5),out CVS1 varchar(3),out tipoPago1 char(1))
+	BEGIN
+		IF EXISTS (SELECT numTarjeta,fechaExp,CVS,tipoPago,cedula from tarjeta where cedula = cedula1) THEN
+			SELECT numTarjeta from tarjeta where cedula = cedula1 into numTarjeta1;
+            SELECT fechaExp from tarjeta where cedula = cedula1 into fechaExp1;
+            SELECT CVS from tarjeta where cedula = cedula1 into CVS1;
+            SELECT tipoPago from tarjeta where cedula = cedula1 into tipoPago1;
+		END IF;
+    END$
+DELIMITER ;
 
 
 
@@ -671,3 +700,5 @@ select @existe;
 select @usuario;
 
 
+select * from usuario;
+select * from ubicacion

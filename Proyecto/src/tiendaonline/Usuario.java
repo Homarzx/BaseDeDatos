@@ -126,7 +126,7 @@ public class Usuario {
             String sql = "CALL BUSCAR_USUARIO_DEVUELVE_NOMBRE(?,?)";
 
             CallableStatement pst = cn.prepareCall(sql);
-   
+            
             pst.setString(1, cedula);
             pst.registerOutParameter(2, Types.VARCHAR);
             
@@ -144,5 +144,87 @@ public class Usuario {
             JOptionPane.showMessageDialog(null, "VERIFICAR INFORMACION");
         }
         return lista[0];
+    }
+    
+    public String[] DevolverDatosUbicacion(String cedula) {
+        String[] lista = new String[8];
+        
+        try {
+            Conexion con = new Conexion();
+            cn = con.conectar();
+
+            String sql = "CALL BUSCAR_UBICACION(?,?,?,?,?,?,?,?,?)";
+
+            CallableStatement pst = cn.prepareCall(sql);
+            
+            pst.setString(1, cedula);
+            pst.registerOutParameter(2, Types.VARCHAR);
+            pst.registerOutParameter(3, Types.VARCHAR);
+            pst.registerOutParameter(4, Types.VARCHAR);
+            pst.registerOutParameter(5, Types.VARCHAR);
+            pst.registerOutParameter(6, Types.VARCHAR);
+            pst.registerOutParameter(7, Types.VARCHAR);
+            pst.registerOutParameter(8, Types.VARCHAR);
+            pst.registerOutParameter(9, Types.VARCHAR);
+            
+            pst.execute();
+            
+            lista[0] = pst.getString(2);
+            lista[1] = pst.getString(3);
+            lista[2] = pst.getString(4);
+            lista[3] = pst.getString(5);
+            lista[4] = pst.getString(6);
+            lista[5] = pst.getString(7);
+            lista[6] = pst.getString(8);
+            lista[7] = pst.getString(9);
+            
+            
+            pst.executeUpdate();
+
+            pst.close();
+            cn.close();
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+            JOptionPane.showMessageDialog(null, "VERIFICAR INFORMACION");
+        }
+        return lista;
+    }
+    
+    public String[] DevolverDatosTarjeta(String cedula) {
+        String[] lista = new String[4];
+        
+        try {
+            Conexion con = new Conexion();
+            cn = con.conectar();
+
+            String sql = "CALL BUSCAR_TARJETA(?,?,?,?,?)";
+
+            CallableStatement pst = cn.prepareCall(sql);
+            
+            pst.setString(1, cedula);
+            pst.registerOutParameter(2, Types.CHAR);
+            pst.registerOutParameter(3, Types.VARCHAR);
+            pst.registerOutParameter(4, Types.VARCHAR);
+            pst.registerOutParameter(5, Types.CHAR);
+            
+            
+            pst.execute();
+            
+            lista[0] = pst.getString(2);
+            lista[1] = pst.getString(3);
+            lista[2] = pst.getString(4);
+            lista[3] = pst.getString(5);
+            
+            
+            
+            pst.executeUpdate();
+
+            pst.close();
+            cn.close();
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+            JOptionPane.showMessageDialog(null, "VERIFICAR INFORMACION");
+        }
+        return lista;
     }
 }

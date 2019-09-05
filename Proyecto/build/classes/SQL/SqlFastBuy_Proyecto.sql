@@ -56,13 +56,13 @@ CREATE TABLE `cuenta` (
   `tipo` char(1) NOT NULL,
   `usuario` varchar(10) NOT NULL,
   `correo` varchar(200) NOT NULL,
-  `contraseÃ±a` varchar(12) NOT NULL,
+  `contraseña` varchar(12) NOT NULL,
   PRIMARY KEY (`idCuenta`),
   KEY `usuario` (`usuario`),
   CONSTRAINT `cuenta_fk_1` FOREIGN KEY (`usuario`) REFERENCES `usuario` (`cedula`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-INSERT INTO cuenta(tipo,usuario,correo,contraseÃ±a) VALUES ('V','0924372095','rrau@hotmail.com','as35d435'),
+INSERT INTO cuenta(tipo,usuario,correo,contraseña) VALUES ('V','0924372095','rrau@hotmail.com','as35d435'),
 ('V','0926554035','harris.sage@yahoo.com','sdf3cv5454'),
 ('V','0938248440','stoy@gmail.com','asd43as5'),
 ('V','0921077992','areilly@gmail.com','a5c2w4a3'),
@@ -133,7 +133,7 @@ CREATE TABLE `tarjeta` (
   `numTarjeta` char(16) NOT NULL,
   `fechaExp` varchar(5) NOT NULL,
   `CVS` varchar(3) NOT NULL,
-  `banco` varchar(20) NOT NULL,
+  `banco` varchar(20) NULL,
   `tipoPago` char(1) NOT NULL,
   `cedula` char(10) NOT NULL,
   PRIMARY KEY (`numTarjeta`),
@@ -274,7 +274,7 @@ DROP TABLE IF EXISTS `orden_pedido`;
 CREATE TABLE `orden_pedido` (
   `idOrden` char(10) NOT NULL,
   `nombreReceptor` varchar(50) default NULL,
-  `total_pedido` default NULL,
+  `total_pedido` double default NULL,
   `notas` varchar(15) default NULL,
   `estado` char(1) default NULL,
   `numTarjeta` char(16) NOT NULL,
@@ -437,22 +437,22 @@ CREATE TABLE `conforma` (
  
 DROP PROCEDURE IF EXISTS REGISTRAR_USUARIO_COMPRADOR;
 DELIMITER $
-CREATE PROCEDURE REGISTRAR_USUARIO_COMPRADOR(IN cedula1 VARCHAR(10), IN nombres1 VARCHAR(40), IN apellidos1 VARCHAR(40),IN tipoUsuario1 CHAR(1), IN edad1 VARCHAR(3), IN telefono1 VARCHAR(10),IN correo1 VARCHAR(200), IN contraseÃ±a1 VARCHAR(12))
+CREATE PROCEDURE REGISTRAR_USUARIO_COMPRADOR(IN cedula1 VARCHAR(10), IN nombres1 VARCHAR(40), IN apellidos1 VARCHAR(40),IN tipoUsuario1 CHAR(1), IN edad1 VARCHAR(3), IN telefono1 VARCHAR(10),IN correo1 VARCHAR(200), IN contraseña1 VARCHAR(12))
 	BEGIN
 		IF NOT EXISTS (select usuario,tipo from cuenta where usuario = cedula1 and tipo = tipoUsuario1) THEN
 			INSERT INTO usuario(cedula,nombres,apellidos,edad,telefono) VALUES (cedula1,nombres1,apellidos1,edad1,telefono1);
-            INSERT INTO cuenta(tipo,usuario,correo,contraseÃ±a) VALUES (tipoUsuario1,cedula1,correo1,contraseÃ±a1);
+            INSERT INTO cuenta(tipo,usuario,correo,contraseña) VALUES (tipoUsuario1,cedula1,correo1,contraseña1);
 		END IF;
 	END$
 DELIMITER ;
 
 DROP PROCEDURE IF EXISTS REGISTRAR_USUARIO_VENDEDOR;
 DELIMITER $
-CREATE PROCEDURE REGISTRAR_USUARIO_VENDEDOR(IN cedula1 VARCHAR(10), IN nombres1 VARCHAR(40), IN apellidos1 VARCHAR(40),IN tipoUsuario1 CHAR(1),IN nombreTienda1 VARCHAR(20),IN telefono1 VARCHAR(10),IN ruc1 VARCHAR(11),IN correo1 VARCHAR(200), IN contraseÃ±a1 VARCHAR(12))
+CREATE PROCEDURE REGISTRAR_USUARIO_VENDEDOR(IN cedula1 VARCHAR(10), IN nombres1 VARCHAR(40), IN apellidos1 VARCHAR(40),IN tipoUsuario1 CHAR(1),IN nombreTienda1 VARCHAR(20),IN telefono1 VARCHAR(10),IN ruc1 VARCHAR(11),IN correo1 VARCHAR(200), IN contraseña1 VARCHAR(12))
 	BEGIN
 		IF NOT EXISTS (select usuario,tipo from cuenta where usuario = cedula1 and tipo = tipoUsuario1) THEN
 			INSERT INTO usuario(cedula,nombres,apellidos,nombreTienda,telefono,ruc) VALUES (cedula1,nombres1,apellidos1,edad1,telefono1);
-            INSERT INTO cuenta(tipo,usuario,correo,contraseÃ±a) VALUES (tipoUsuario1,cedula1,correo1,contraseÃ±a1);
+            INSERT INTO cuenta(tipo,usuario,correo,contraseña) VALUES (tipoUsuario1,cedula1,correo1,contraseña1);
 		END IF;
 	END$
 DELIMITER ;
@@ -597,6 +597,73 @@ CREATE PROCEDURE BUSCAR_FOTO(IN idProducto1 char(10),out url1 varchar(400))
     END$
 DELIMITER ;
  
+
+ /*procedure que se utilizara al dar clic en comprar*/
+drop procedure if exists crearOrdenP;
+delimiter $
+create procedure crearOrdenP(in numT char(16), in ced varchar(10), in ubi char(5))
+begin
+declare idO char(5);
+select CAST(FLOOR(RAND()*(999-1)+1) AS char(5)) into idO;
+		IF NOT EXISTS (select idOrden from orden_pedido where idOrden=idO) 
+        and exists(select numTarjeta from tarjeta where tarjeta.cedula=ced and numTarjeta=numT)
+        then insert into orden_pedido(idOrden,nombreReceptor,total_pedido,notas,estado,
+										numTarjeta,cedula,fechaEntrega,fechaEnvio,id_ubicacion ) 
+        values(idO,NULL,NULL,NULL,NULL,numT,ced,NULL,NULL,ubi) ;
+	end if;
+	
+    end $
+delimiter ;
+
+
+DROP PROCEDURE IF EXISTS agregarUbicacion;
+delimiter $   
+CREATE PROCEDURE agregarUbicacion(in pais varchar(50),in ciudad varchar(20), in sector varchar(15),
+					in calle varchar(15), in manzana varchar(4),in villa varchar(4),in codigo_postal varchar(6),                   
+                    in cedula varchar(10))
+begin
+declare idU char(5);
+select CAST(FLOOR(RAND()*(999-1)+1) AS char(5)) into idU;
+    IF NOT EXISTS(select u.id_ubicacion from ubicacion u where u.id_ubicacion=idU) THEN
+INSERT INTO ubicacion  VALUES (idU, pais, ciudad, sector, calle, manzana, villa, codigo_postal,cedula);
+            END IF;
+                
+END$
+DELIMITER ;
+
+
+DROP PROCEDURE IF EXISTS agregarTarjeta;
+delimiter $   
+CREATE PROCEDURE agregarTarjeta(in numTarjeta varchar(16),in fechaexp varchar(5), in cvs varchar(3),
+					in banco varchar(20), in tipoPago char(1), in cedula varchar(10))
+begin
+    IF NOT EXISTS(select t.numTarjeta from tarjeta t where t.numTarjeta=numTarjeta) THEN
+INSERT INTO tarjeta  VALUES (numTarjeta, fechaexp, cvs, banco, tipoPago,cedula);
+            END IF;
+                
+END$
+DELIMITER ;
+
+DROP PROCEDURE IF EXISTS ELIMINAR_TARJETA;
+DELIMITER $
+CREATE PROCEDURE ELIMINAR_TARJETA(IN  numT CHAR(50))
+	BEGIN
+		DELETE FROM tarjeta WHERE numTarjeta = numT;
+	END$
+DELIMITER ;
+
+
+DROP PROCEDURE IF EXISTS ELIMINAR_UBI;
+DELIMITER $
+CREATE PROCEDURE ELIMINAR_UBI(IN  idU CHAR(50))
+	BEGIN
+		DELETE FROM ubicacion WHERE id_ubicacion = idU;
+	END$
+DELIMITER ;
+
+
+
+
 call buscar_cuenta('rrau@hotmail.com',@contra,@tip,@existe,@usuario);
 select @contra;
 select @tip;

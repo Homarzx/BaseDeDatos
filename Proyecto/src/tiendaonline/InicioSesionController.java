@@ -144,21 +144,31 @@ public class InicioSesionController implements Initializable, DraggedScene {
 
     public static String tipoUser;
     public static String nomUsuario;
+    
+    @FXML
+    private Label precioCompra;
 
+    public void setPrecioCompra(String precio) {
+        this.precioCompra.setText(precio);
+    }
+    
+    
+
+    
     @FXML
     void registrarComprador(ActionEvent event) {
-        if (c_contraseña.getText().equals(c_repetirContraseña)) {
+        if (c_contraseña.getText().equals(c_repetirContraseña.getText())) {
             Usuario user = new Usuario();
-            user.RegistrarUsuarioComprador(c_cedula, c_nombres, c_apellidos, tipoUser, c_edad, c_telefono, c_correo, c_contraseña);
+            user.RegistrarUsuarioComprador(c_cedula, c_nombres, c_apellidos, "C", c_edad, c_telefono, c_correo, c_contraseña);
         }
 
     }
 
     @FXML
     void registrarVendedor(ActionEvent event) {
-        if (v_contraseña.getText().equals(v_repetircontraseña)) {
+        if (v_contraseña.getText().equals(v_repetircontraseña.getText())) {
             Usuario user = new Usuario();
-            user.RegistrarUsuarioVendedor(v_cedula, v_nombres, v_apellidos, tipoUser, v_nomTienda, v_telefono, v_ruc, v_correo, v_contraseña);
+            user.RegistrarUsuarioVendedor(v_cedula, v_nombres, v_apellidos, "V", v_nomTienda, v_telefono, v_ruc, v_correo, v_contraseña);
         }
     }
 
@@ -180,8 +190,19 @@ public class InicioSesionController implements Initializable, DraggedScene {
                 try {
                     FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Screen2.fxml"));
                     Parent root1 = (Parent) fxmlLoader.load();
-                    Screen2Controller sc = fxmlLoader.getController();
+                    Screen2Controller sc = new Screen2Controller();
+                    sc = fxmlLoader.getController();
                     sc.setNombreUsuario("Hola, " + nomUsuario);
+                    sc.setLabelPrecioAcumulado(String.valueOf(precioCompra.getText()));
+
+                    if (Double.valueOf(precioCompra.getText()) > 0.0) {
+                        sc.setNombreUsuario2("Hola, " + nomUsuario);
+                        sc.getScrollPanelCompra().setVisible(true);
+                        sc.getScrollPanel1().setVisible(false);
+                        sc.getScrollPanel2().setVisible(false);
+                        sc.getScrollPanelCarrito().setVisible(false);
+                    }
+
                     sc.getButtonIniciar();
                     sc.getLabelCuentaLista();
                     if (tipoUser.equals("V")) {
@@ -201,7 +222,7 @@ public class InicioSesionController implements Initializable, DraggedScene {
             }
         } else if (lista[2].equals('0')) {
             JOptionPane.showMessageDialog(null, "USUARIO NO REGISTRADO");
-        }else{
+        } else {
             JOptionPane.showMessageDialog(null, "DATOS INCORRECTOS");
         }
 
@@ -273,12 +294,11 @@ public class InicioSesionController implements Initializable, DraggedScene {
         fade.play();
     }
 
-    
-
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         TiendaOnline.firtstage.close();
         this.onDraggedScene(this.container);
+        System.out.println("INICIO SESION PRECIO: "+precioCompra.getText());
     }
 
 }

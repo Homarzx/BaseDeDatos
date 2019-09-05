@@ -31,6 +31,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Cursor;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
@@ -94,7 +95,40 @@ public class Screen2Controller implements Initializable {
     void abrirsubMenu(MouseEvent event) {
         vboxCuentaLista.setVisible(true);
     }
-
+    
+    @FXML
+    private TextField ubi_pais;
+    
+    @FXML
+    private TextField ubi_ciudad;
+    
+    @FXML
+    private TextField ubi_sector;
+    
+    @FXML
+    private TextField ubi_calle;
+    
+    @FXML
+    private TextField ubi_manzana;
+    
+    @FXML
+    private TextField ubi_villa;
+    
+    @FXML
+    private TextField ubi_codigoPostal;
+    
+    @FXML
+    private TextField tar_numero;
+    
+    @FXML
+    private TextField tar_fechExpiracion;
+    
+    @FXML
+    private TextField tar_cvs;
+    
+    @FXML
+    private ComboBox tar_tipoPago;
+    
     @FXML
     private StackPane stackPanel;
 
@@ -232,6 +266,24 @@ public class Screen2Controller implements Initializable {
 
     @FXML
     private JFXButton botonInicio1;
+    
+    @FXML
+    private JFXButton nueva_Ubicacion;
+    
+    @FXML
+    private JFXButton agregar_Ubicacion;
+    
+    @FXML
+    private JFXButton editar_Ubicacion;
+    
+    @FXML
+    private JFXButton nueva_tarjeta;
+    
+    @FXML
+    private JFXButton agregar_tarjeta;
+    
+    @FXML
+    private JFXButton editar_tarjeta;
 
     @FXML
     private ScrollPane scrollPanel1;
@@ -329,12 +381,32 @@ public class Screen2Controller implements Initializable {
     @FXML
     private Label labelSubtotal;
 
+    public void setLabelSubtotal(String subtotal) {
+        this.labelSubtotal.setText(subtotal);
+    }
+
+    
     //private String txtProducto;
     
     HBox agregarAlcarrito;
     int conteo = -1;
     int cantidadProducto = 0;
-    double precioProductosAcumulados = 0.0;
+
+    
+    
+    double precioProductosAcumulados = 0.0; 
+    
+    
+    @FXML
+    void eliminarTarjetaGuardada(ActionEvent event) {
+
+    }
+
+    @FXML
+    void eliminarUbicacionGuardada(ActionEvent event) {
+
+    }
+    
     @FXML
     void BuscarProducto(MouseEvent event) {
         //llenarSet();
@@ -493,12 +565,72 @@ public class Screen2Controller implements Initializable {
     }
     
     @FXML
+    private Label labelPrecioAcumulado;
+
+    public void setLabelPrecioAcumulado(String labelPrecioAcumulado) {
+        this.labelPrecioAcumulado.setText(labelPrecioAcumulado);
+    }
+    
+    
+    @FXML
     void procederAlPago(ActionEvent event) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("InicioSesion.fxml"));
+            Parent root1 = (Parent) fxmlLoader.load();
+            InicioSesionController ini = new InicioSesionController();
+            ini = fxmlLoader.getController();
+            ini.setPrecioCompra(String.valueOf(precioProductosAcumulados));
+            Stage stage = new Stage();
+            stage.initStyle(StageStyle.UNDECORATED);
+            stage.setScene(new Scene(root1));
+            stage.show();
+            InicioSesionController.pagina = stage;
+            stageActual.close();
+        } catch (Exception ex) {
+
+        }
+        
+        
         scrollPanelCompra.setVisible(true);
         scrollPanel1.setVisible(false);
         scrollPanel2.setVisible(false);
         scrollPanelCarrito.setVisible(false);
+        
+        
+        
+       
     }
+    
+    @FXML
+    private Label nombreUsuario2;
+
+    public void setNombreUsuario2(String nombre) {
+        this.nombreUsuario2.setText(nombre);
+    }
+
+    
+    
+    
+
+    public ScrollPane getScrollPanelCompra() {
+        return scrollPanelCompra;
+    }
+
+    public ScrollPane getScrollPanelCarrito() {
+        return scrollPanelCarrito;
+    }
+
+    public ScrollPane getScrollPanel2() {
+        return scrollPanel2;
+    }
+
+    public ScrollPane getScrollPanel1() {
+        return scrollPanel1;
+    }
+
+    
+    
+    
     
     @FXML
     void pagPrincipal(MouseEvent event) {
@@ -849,6 +981,7 @@ public class Screen2Controller implements Initializable {
         labelvender.setDisable(true);
         vboxCuentaLista.setVisible(false);
         vBoxProductosCarrito.setStyle("-fx-background-color:  white");
+        System.out.println(labelSubtotal.getText());
     }
 
 }
