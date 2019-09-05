@@ -701,4 +701,4 @@ select @usuario;
 
 
 select * from usuario;
-select * from ubicacion
+select * from ubicaciongi

@@ -353,7 +353,7 @@
             </AnchorPane>
          </content>
       </ScrollPane>
-      <ScrollPane fx:id="scrollPanelCompra" fitToHeight="true" fitToWidth="true" pannable="true" prefHeight="200.0" prefWidth="1352.0" stylesheets="@../Styles/EstiloBoton.css">
+      <ScrollPane fx:id="scrollPanelCompra" fitToHeight="true" fitToWidth="true" pannable="true" prefHeight="200.0" prefWidth="1352.0" stylesheets="@../Styles/EstiloBoton.css" visible="false">
          <content>
             <AnchorPane minWidth="-Infinity" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #17202A;">
                <children>
@@ -1641,7 +1641,7 @@
             </AnchorPane>
          </content>
       </ScrollPane>
-      <ScrollPane fx:id="scrollPanel1" fitToHeight="true" fitToWidth="true" pannable="true" prefHeight="200.0" prefWidth="200.0" stylesheets="@../Styles/EstiloBoton.css" visible="false">
+      <ScrollPane fx:id="scrollPanel1" fitToHeight="true" fitToWidth="true" pannable="true" prefHeight="200.0" prefWidth="200.0" stylesheets="@../Styles/EstiloBoton.css">
          <content>
             <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #17202A;">
                <children>
