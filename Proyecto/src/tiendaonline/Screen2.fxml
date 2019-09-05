@@ -808,7 +808,7 @@
                                              </padding>
                                           </HBox>
                                           <Label style="-fx-text-fill: black; -fx-font-weight: BOLD; -fx-font-size: 20;" text="UBICACIONES GUARDADAS:" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="40.0" />
-                                          <ComboBox fx:id="comboUbicacion" prefWidth="500.0" promptText="-- Seleccionar ubicacion guardada --" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="100.0">
+                                          <ComboBox fx:id="comboUbicacion" onAction="#comboUbicaciones" prefWidth="500.0" promptText="-- Seleccionar ubicacion guardada --" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="100.0">
                                              <cursor>
                                                 <Cursor fx:constant="HAND" />
                                              </cursor>
@@ -823,7 +823,7 @@
                                     <AnchorPane minWidth="-Infinity" prefHeight="200.0" prefWidth="500.0" style="-fx-background-color: white;">
                                        <children>
                                           <Label style="-fx-text-fill: black; -fx-font-weight: BOLD; -fx-font-size: 20;" text="TARJETAS GUARDADAS:" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="40.0" />
-                                          <ComboBox fx:id="comboTarjetas" prefWidth="500.0" promptText="-- Seleccionar tarjeta guardada --" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="100.0">
+                                          <ComboBox fx:id="comboTarjetas" onAction="#comboTarjetas" prefWidth="500.0" promptText="-- Seleccionar tarjeta guardada --" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="100.0">
                                              <cursor>
                                                 <Cursor fx:constant="HAND" />
                                              </cursor>
